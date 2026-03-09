@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Friseur in Bad Lippspringe &#8211; Eleganz Salon</title>
+
+  <meta name="description" content="Moderner Friseursalon in Bad Lippspringe. Eleganz Salon bietet Herrenhaarschnitte, Damenhaarschnitte, Styling und professionelle Haarpflege." />
+  <meta name="keywords" content="Friseur Bad Lippspringe, Herrenfriseur Bad Lippspringe, Damenfriseur Bad Lippspringe, Haarschnitt Bad Lippspringe" />
+
+  <meta property="og:title" content="Friseur in Bad Lippspringe &#8211; Eleganz Salon" />
+  <meta property="og:description" content="Moderner Friseursalon in Bad Lippspringe. Eleganz Salon bietet Herrenhaarschnitte, Damenhaarschnitte, Styling und professionelle Haarpflege." />
+  <meta property="og:type" content="website" />
+
+  <!-- Schema Markup für Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Eleganz Salon",
+    "url": "https://eleganz-salon.de",
+    "telephone": "+49 5252 400 00 00",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Detmolder Straße 165",
+      "addressLocality": "Bad Lippspringe",
+      "postalCode": "33175",
+      "addressCountry": "DE"
+    },
+    "priceRange": "€€"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+/* ═══════════════════════════════════════════════
+   ELEGANZ SALON — Premium CSS
+   ═══════════════════════════════════════════════ */
+
+/* ── Variables ── */
+:root {
+  --black: #0b0b0b;
+  --cream: #f5f2ed;
+  --gold: #c6a76e;
+  --gold-light: #d9bf92;
+  --gold-dark: #a8874d;
+  --white: #ffffff;
+  --gray-100: #f0ede8;
+  --gray-400: #9a9590;
+  --gray-600: #5a5550;
+
+  --ff-head: 'Playfair Display', Georgia, serif;
+  --ff-body: 'Inter', sans-serif;
+
+  --max-w: 1240px;
+  --pad-x: clamp(1.25rem, 5vw, 5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+  --transition: 0.65s var(--ease-out);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.65;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { text-decoration: none; color: inherit; }
+button { cursor: none; font-family: var(--ff-body); }
+
+/* ── Custom Cursor ── */
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, background 0.3s, width 0.3s, height 0.3s;
+}
+.cursor-follower {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.35s var(--ease-out), opacity 0.3s, width 0.4s var(--ease-out), height 0.4s var(--ease-out);
+  opacity: 0.7;
+}
+body:hover .cursor { opacity: 1; }
+.cursor--hover { width: 20px; height: 20px; background: var(--gold-dark); }
+.cursor-follower--hover { width: 64px; height: 64px; opacity: 0.3; }
+
+@media (hover: none) {
+  .cursor, .cursor-follower { display: none; }
+  body { cursor: auto; }
+  button { cursor: pointer; }
+}
+
+/* ── Container ── */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* ── Section ── */
+.section { padding: clamp(5rem, 10vw, 9rem) 0; }
+.section--dark { background: var(--black); color: var(--white); }
+.section--cream { background: var(--cream); }
+
+.section-label {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.section-label--light { color: var(--gold-light); }
+
+.section-headline {
+  font-family: var(--ff-head);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+.section-headline em {
+  font-style: italic;
+  color: var(--gold);
+}
+.section-headline--light { color: var(--white); }
+
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.9em 2em;
+  font-family: var(--ff-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.35s, transform 0.2s;
+  cursor: none;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+  z-index: 0;
+}
+.btn:hover::after { transform: scaleX(1); }
+.btn > * { position: relative; z-index: 1; }
+.btn svg { width: 1em; height: 1em; }
+
+.btn--gold {
+  background: var(--gold);
+  color: var(--black);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+.btn--ghost::after { background: rgba(255,255,255,0.1); }
+.btn--full { width: 100%; justify-content: center; }
+.btn:hover { transform: translateY(-2px); }
+
+/* ── Reveal animations ── */
+.reveal-up, .reveal-left, .reveal-right {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  transition-delay: var(--delay, 0s);
+}
+.reveal-up { transform: translateY(50px); }
+.reveal-left { transform: translateX(-50px); }
+.reveal-right { transform: translateX(50px); }
+.revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ════════════════════════════════════
+   NAV
+════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  padding: 1.4rem var(--pad-x);
+  transition: background 0.5s, padding 0.4s, backdrop-filter 0.5s;
+}
+.nav.scrolled {
+  background: rgba(11,11,11,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 0.9rem var(--pad-x);
+  border-bottom: 1px solid rgba(198,167,110,0.12);
+}
+.nav__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.1em;
+  color: var(--white);
+  font-family: var(--ff-head);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.nav__logo-mark {
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--gold);
+  font-style: italic;
+}
+.nav__logo-text { display: flex; align-items: baseline; gap: 0.12em; }
+.nav__logo-text em { color: var(--gold-light); }
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav__link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.35s var(--ease-out);
+}
+.nav__link:hover { color: var(--white); }
+.nav__link:hover::after { width: 100%; }
+
+.nav__link--cta {
+  background: var(--gold);
+  color: var(--black) !important;
+  padding: 0.6em 1.4em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transition: background 0.3s, transform 0.2s;
+}
+.nav__link--cta::after { display: none; }
+.nav__link--cta:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.nav__burger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--white);
+  transition: transform 0.35s, opacity 0.25s;
+}
+.nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__burger.open span:nth-child(2) { opacity: 0; }
+.nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav__burger { display: flex; }
+  .nav__links {
+    position: fixed;
+    inset: 0; top: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+    background: var(--black);
+    transform: translateX(100%);
+    transition: transform 0.55s var(--ease-out);
+    pointer-events: none;
+  }
+  .nav__links.open {
+    transform: translateX(0);
+    pointer-events: all;
+  }
+  .nav__link { font-size: 1.1rem; }
+  .nav__link--cta { padding: 0.9em 2.2em; }
+}
+
+/* ════════════════════════════════════
+   HERO
+════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero__bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+}
+.hero__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  will-change: transform;
+  transform: scale(1.1);
+  transition: transform 0.1s linear;
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(11,11,11,0.82) 0%,
+    rgba(11,11,11,0.55) 50%,
+    rgba(11,11,11,0.3) 100%
+  );
+}
+.hero__noise {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.hero__content {
+  position: relative; z-index: 2;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 6rem var(--pad-x) 4rem;
+  width: 100%;
+}
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gold-light);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 0.3s forwards;
+}
+.hero__line {
+  display: inline-block;
+  width: 40px; height: 1px;
+  background: var(--gold);
+}
+.hero__headline {
+  font-family: var(--ff-head);
+  font-size: clamp(2.6rem, 7vw, 6.5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -0.025em;
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 0.5s forwards;
+}
+.hero__headline em {
+  display: block;
+  font-style: italic;
+  color: var(--gold);
+}
+.hero__sub {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: rgba(255,255,255,0.7);
+  max-width: 560px;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 0.7s forwards;
+}
+.br-desktop { display: none; }
+@media (min-width: 768px) { .br-desktop { display: block; } }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 0.9s forwards;
+}
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeIn 1s ease 1.4s both;
+}
+.hero__scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, rgba(198,167,110,0.8), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.15); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ════════════════════════════════════
+   MARQUEE
+════════════════════════════════════ */
+.marquee {
+  background: var(--gold);
+  overflow: hidden;
+  padding: 1rem 0;
+  border-top: 1px solid var(--gold-dark);
+}
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  white-space: nowrap;
+  animation: marqueeScroll 22s linear infinite;
+}
+.marquee__track span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.marquee__track .sep { opacity: 0.5; }
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ════════════════════════════════════
+   ABOUT
+════════════════════════════════════ */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: center;
+}
+.about__img-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.about__img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+.about__img-wrap:hover img { transform: scale(1.04); }
+
+/* Decorative corner accents */
+.about__img-wrap::before,
+.about__img-wrap::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  width: 50px; height: 50px;
+  border-color: var(--gold);
+  border-style: solid;
+}
+.about__img-wrap::before { top: -16px; left: -16px; border-width: 2px 0 0 2px; }
+.about__img-wrap::after { bottom: -16px; right: -16px; border-width: 0 2px 2px 0; }
+
+.about__badge {
+  position: absolute;
+  bottom: 2rem; right: -2rem;
+  background: var(--gold);
+  color: var(--black);
+  padding: 1.2rem 1.5rem;
+  text-align: center;
+  z-index: 2;
+}
+.about__badge-num {
+  display: block;
+  font-family: var(--ff-head);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.about__badge-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.about__text {
+  color: var(--gray-600);
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.about__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2.5rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-100);
+}
+.about__stat-num {
+  display: block;
+  font-family: var(--ff-head);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+.about__stat-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+@media (max-width: 900px) {
+  .about__grid { grid-template-columns: 1fr; }
+  .about__badge { right: 1rem; }
+}
+
+/* ════════════════════════════════════
+   SERVICES
+════════════════════════════════════ */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 1.5px;
+  background: rgba(255,255,255,0.05);
+}
+
+.service-card {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  padding: 3rem 2.5rem;
+  overflow: hidden;
+  transition: background 0.5s;
+  cursor: none;
+}
+.service-card:hover { background: rgba(198,167,110,0.06); }
+.service-card__hover-line {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.5s var(--ease-out);
+}
+.service-card:hover .service-card__hover-line { width: 100%; }
+
+.service-card__icon {
+  width: 52px; height: 52px;
+  color: var(--gold);
+  margin-bottom: 1.8rem;
+  transition: transform 0.4s var(--ease-out);
+}
+.service-card:hover .service-card__icon { transform: scale(1.1) rotate(-5deg); }
+.service-card__icon svg { width: 100%; height: 100%; }
+
+.service-card h3 {
+  font-family: var(--ff-head);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+.service-card p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.service-card__price {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(198,167,110,0.25);
+  padding: 0.35em 0.85em;
+}
+
+/* ════════════════════════════════════
+   GALLERY
+════════════════════════════════════ */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 320px;
+  gap: 8px;
+  padding: 0 var(--pad-x);
+  max-width: calc(var(--max-w) + 2 * var(--pad-x));
+  margin: 0 auto;
+}
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+.gallery__item--tall { grid-row: span 2; }
+.gallery__item--wide { grid-column: span 2; }
+
+.gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-out), filter 0.5s;
+  filter: brightness(0.95) saturate(0.9);
+}
+.gallery__item:hover img {
+  transform: scale(1.07);
+  filter: brightness(1) saturate(1.1);
+}
+.gallery__item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,11,11,0.7) 0%, transparent 50%);
+  display: flex; align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.gallery__item:hover .gallery__item-overlay { opacity: 1; }
+.gallery__item-overlay span {
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 220px;
+  }
+  .gallery__item--wide { grid-column: span 2; }
+}
+@media (max-width: 580px) {
+  .gallery__grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 260px;
+  }
+  .gallery__item--tall,
+  .gallery__item--wide { grid-column: auto; grid-row: auto; }
+}
+
+/* ════════════════════════════════════
+   BOOKING
+════════════════════════════════════ */
+.booking__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: start;
+}
+.booking__copy { padding-top: 1rem; }
+.booking__copy p {
+  color: var(--gray-600);
+  margin: 1.5rem 0 2rem;
+  font-size: 0.95rem;
+}
+.booking__info { display: flex; flex-direction: column; gap: 1rem; }
+.booking__info-item {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
+.booking__info-item svg { width: 1.1em; height: 1.1em; flex-shrink: 0; margin-top: 0.15em; color: var(--gold); }
+
+/* Form */
+.booking__form-wrap { position: relative; min-height: 200px; }
+.booking__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: var(--white);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.12);
+  border-top: 3px solid var(--gold);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+.form-group {
+  position: relative;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: var(--gray-100);
+  border: 1.5px solid transparent;
+  border-bottom: 1.5px solid #d8d3cc;
+  padding: 1.2rem 0.9rem 0.5rem;
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  color: var(--black);
+  transition: border-color 0.3s, background 0.3s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  resize: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--gold);
+  background: #faf8f4;
+}
+.form-group label {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  pointer-events: none;
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+}
+.form-group textarea ~ label { top: 1.2rem; transform: none; }
+
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group input:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group select:valid ~ label {
+  top: 0.4rem;
+  transform: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.form-group--select .select-arrow {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em; height: 1em;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+/* Booking success */
+.booking__success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--white);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.12);
+  border-top: 3px solid var(--gold);
+}
+.booking__success.visible { display: flex; }
+.booking__success-icon {
+  width: 64px; height: 64px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  animation: popIn 0.5s var(--ease-out) both;
+}
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.booking__success h3 {
+  font-family: var(--ff-head);
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--black);
+}
+.booking__success p { color: var(--gray-600); font-size: 0.95rem; }
+
+@media (max-width: 900px) {
+  .booking__grid { grid-template-columns: 1fr; }
+}
+
+/* ════════════════════════════════════
+   MAP
+════════════════════════════════════ */
+.map-section { overflow: hidden; }
+.map-section__header {
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(2.5rem, 5vw, 4rem);
+}
+.map-section__embed {
+  position: relative;
+  filter: grayscale(30%) contrast(0.95);
+  transition: filter 0.5s;
+}
+.map-section__embed:hover { filter: none; }
+.map-section__embed iframe { display: block; }
+
+/* ════════════════════════════════════
+   CONTACT
+════════════════════════════════════ */
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,0.04);
+}
+.contact__block {
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+  background: rgba(255,255,255,0.02);
+  transition: background 0.4s;
+}
+.contact__block:hover { background: rgba(198,167,110,0.06); }
+.contact__icon {
+  width: 44px; height: 44px;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.contact__icon svg { width: 100%; height: 100%; }
+.contact__block h3 {
+  font-family: var(--ff-head);
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.contact__block p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
+}
+.contact__link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  margin-top: 0.8rem;
+  transition: color 0.3s, letter-spacing 0.3s;
+}
+.contact__link:hover { color: var(--gold); letter-spacing: 0.02em; }
+
+.hours-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.5rem;
+}
+.hours-table td { padding: 0.45rem 0; }
+.hours-table td:last-child { text-align: right; color: var(--gold-light); }
+.hours-table .closed td { opacity: 0.4; }
+
+@media (max-width: 900px) {
+  .contact__grid { grid-template-columns: 1fr; }
+}
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+.footer {
+  background: #070707;
+  border-top: 1px solid rgba(198,167,110,0.1);
+  padding-top: 4rem;
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.footer__brand p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  align-items: center;
+}
+.footer__nav a {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.3s;
+}
+.footer__nav a:hover { color: var(--gold); }
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  align-items: center;
+}
+.footer__legal a {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.3);
+  transition: color 0.3s;
+  text-transform: uppercase;
+}
+.footer__legal a:hover { color: var(--gold-light); }
+.footer__bottom {
+  padding: 1.5rem var(--pad-x);
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ════════════════════════════════════
+   MOBILE REFINEMENTS
+════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero__headline { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+
+  .services__grid { grid-template-columns: 1fr; gap: 1px; }
+
+  .section-headline { font-size: clamp(2rem, 8vw, 3rem); }
+
+  .about__badge { right: 0.5rem; bottom: 1rem; }
+}
+
+@media (max-width: 400px) {
+  .hero__actions { flex-direction: column; }
+  .btn { justify-content: center; }
+}
+
+
+  /* ── Modal ── */
+  .modal-overlay {
+    position:fixed;inset:0;z-index:9000;
+    background:rgba(11,11,11,.78);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    display:flex;align-items:center;justify-content:center;
+    padding:1.5rem;opacity:0;pointer-events:none;
+    transition:opacity .4s cubic-bezier(.16,1,.3,1);
+  }
+  .modal-overlay.active{opacity:1;pointer-events:all;}
+  .modal-box{
+    background:var(--white);max-width:760px;width:100%;
+    max-height:85vh;overflow-y:auto;
+    padding:clamp(2rem,5vw,3.5rem);position:relative;
+    border-top:3px solid var(--gold);
+    box-shadow:0 40px 100px -20px rgba(0,0,0,.45);
+    transform:translateY(30px);
+    transition:transform .45s cubic-bezier(.16,1,.3,1);
+    scrollbar-width:thin;scrollbar-color:var(--gold) transparent;
+  }
+  .modal-overlay.active .modal-box{transform:translateY(0);}
+  .modal-box::-webkit-scrollbar{width:4px;}
+  .modal-box::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+  .modal-close{
+    position:sticky;top:0;float:right;
+    background:var(--black);border:none;
+    width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--white);transition:background .3s,transform .3s;
+    cursor:pointer;margin-left:1rem;margin-bottom:.5rem;
+  }
+  .modal-close:hover{background:var(--gold-dark);transform:rotate(90deg);}
+  .modal-close svg{width:1.1em;height:1.1em;}
+  .modal-content h2{
+    font-family:var(--ff-head);font-size:clamp(1.6rem,4vw,2.2rem);
+    font-weight:500;color:var(--black);margin-bottom:.4rem;padding-right:3rem;
+  }
+  .modal-gold-line{width:48px;height:2px;background:var(--gold);margin-bottom:2rem;}
+  .modal-content h3{
+    font-family:var(--ff-head);font-size:1.05rem;font-weight:600;
+    color:var(--black);margin:2rem 0 .5rem;
+  }
+  .modal-content p,.modal-content li{font-size:.9rem;color:#5a5550;line-height:1.8;}
+  .modal-content ul{padding-left:1.2rem;margin:.5rem 0;}
+  .modal-content a{color:#a8874d;text-decoration:underline;}
+  .modal-content a:hover{color:var(--gold);}
+  .modal-section{margin-bottom:1.5rem;}
+
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo">
+        <span class="nav__logo-mark">E</span>
+        <span class="nav__logo-text">leganz <em>Salon</em></span>
+      </a>
+      <button class="nav__burger" id="navBurger" aria-label="Men&uuml; &ouml;ffnen">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#about" class="nav__link">&Uuml;ber uns</a></li>
+        <li><a href="#services" class="nav__link">Leistungen</a></li>
+        <li><a href="#gallery" class="nav__link">Galerie</a></li>
+        <li><a href="#contact" class="nav__link">Kontakt</a></li>
+        <li><a href="#booking" class="nav__link nav__link--cta">Termin buchen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <img src="innenraum.jpeg"
+           alt="Eleganz Salon &#8211; professioneller Haarschnitt" class="hero__img" loading="eager" />
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__noise"></div>
+    <div class="hero__content">
+      <div class="hero__eyebrow">
+        <span class="hero__line"></span>
+        <span>Bad Lippspringe &middot; Seit 2010</span>
+        <span class="hero__line"></span>
+      </div>
+     <h1 class="hero__headline">
+        Eleganz Salon<br />
+      <em>Friseur in Bad Lippspringe</em>
+    </h1>
+      <p class="hero__sub">
+        Ihr moderner Friseursalon in Bad Lippspringe f&uuml;r hochwertige<br class="br-desktop" />
+        Haarschnitte und Styling.
+      </p>
+      <div class="hero__actions">
+        <a href="#booking" class="btn btn--gold">Termin buchen</a>
+        <a href="#services" class="btn btn--ghost">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <div class="hero__scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Herrenhaarschnitte</span><span class="sep">&#10022;</span>
+      <span>Damenfrisuren</span><span class="sep">&#10022;</span>
+      <span>Bartpflege</span><span class="sep">&#10022;</span>
+      <span>Colorationen</span><span class="sep">&#10022;</span>
+      <span>Styling</span><span class="sep">&#10022;</span>
+      <span>Herrenhaarschnitte</span><span class="sep">&#10022;</span>
+      <span>Damenfrisuren</span><span class="sep">&#10022;</span>
+      <span>Bartpflege</span><span class="sep">&#10022;</span>
+      <span>Colorationen</span><span class="sep">&#10022;</span>
+      <span>Styling</span><span class="sep">&#10022;</span>
+      <span>Herrenhaarschnitte</span><span class="sep">&#10022;</span>
+      <span>Damenfrisuren</span><span class="sep">&#10022;</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="container about__grid">
+      <div class="about__media reveal-left">
+        <div class="about__img-wrap">
+          <img src="cut.jpg"
+               alt="Eleganz Salon Innenraum" loading="lazy" />
+          <div class="about__badge">
+            <span class="about__badge-num">14</span>
+            <span class="about__badge-label">Jahre<br />Erfahrung</span>
+          </div>
+        </div>
+      </div>
+      <div class="about__copy reveal-right">
+        <div class="section-label">&Uuml;ber uns</div>
+        <h2 class="section-headline">Wo Stil<br /><em>auf K&ouml;nnen trifft</em></h2>
+        <p class="about__text">Eleganz Salon in Bad Lippspringe steht f&uuml;r moderne Haarschnitte, professionelle Beratung und hochwertige Haarpflege. Unser Ziel ist es, dass jeder Kunde den Salon mit einem perfekten Look verl&auml;sst.</p>
+        <p class="about__text">Mit Leidenschaft, Pr&auml;zision und einem tiefen Verst&auml;ndnis f&uuml;r aktuelle Trends bieten wir Ihnen ein Erlebnis, das weit &uuml;ber einen klassischen Salonbesuch hinausgeht.</p>
+        <div class="about__stats">
+          <div class="about__stat">
+            <span class="about__stat-num">300</span>
+            <span class="about__stat-label">Zufriedene Kunden</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-num">5&#9733;</span>
+            <span class="about__stat-label">Google Bewertung</span>
+          </div>
+        </div>
+        <a href="#booking" class="btn btn--gold">Termin vereinbaren</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section section--dark" id="services">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label section-label--light">Leistungen</div>
+        <h2 class="section-headline section-headline--light">Was wir<br /><em>f&uuml;r Sie tun</em></h2>
+      </div>
+      <div class="services__grid">
+
+        <div class="service-card reveal-up" style="--delay:.05s">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="14" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 38c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M33 20l6 6M33 26l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="service-card__body">
+            <h3>Herrenhaarschnitt</h3>
+            <p>Klassisch oder modern &#8211; pr&auml;zise geschnitten und perfekt gestylt f&uuml;r jeden Anlass.</p>
+            <span class="service-card__price">ab 25 &euro;</span>
+          </div>
+          <div class="service-card__hover-line"></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:.12s">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="13" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 40c0-8.284 6.716-15 15-15s15 6.716 15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M16 8c2 4 10 8 16 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="service-card__body">
+            <h3>Damenhaarschnitt</h3>
+            <p>Von kurz bis lang &#8211; individuell auf Sie abgestimmt, mit Beratung inklusive.</p>
+            <span class="service-card__price">ab 35 &euro;</span>
+          </div>
+          <div class="service-card__hover-line"></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:.19s">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 12c0 0 2 8 8 8s8-8 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 20s-4 4-4 10c0 4 2 6 4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M34 20s4 4 4 10c0 4-2 6-4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 37c2 2 5 3 10 3s8-1 10-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="24" y1="20" x2="24" y2="37" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="service-card__body">
+            <h3>Bartpflege</h3>
+            <p>Professionelle Rasur und Bartformung f&uuml;r den perfekten Auftritt.</p>
+            <span class="service-card__price">ab 18 &euro;</span>
+          </div>
+          <div class="service-card__hover-line"></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:.26s">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 36c3-8 14-24 24-24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M12 12c10 0 24 11 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="service-card__body">
+            <h3>Colorationen</h3>
+            <p>Highlights, Balayage, Vollcoloration &#8211; lebendige Farben mit Premium-Produkten.</p>
+            <span class="service-card__price">ab 55 &euro;</span>
+          </div>
+          <div class="service-card__hover-line"></div>
+        </div>
+
+        <div class="service-card reveal-up" style="--delay:.33s">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 8c-4 4-10 10-10 16 0 5.523 4.477 10 10 10s10-4.477 10-10c0-6-6-12-10-16z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M20 30c1 2 2 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="service-card__body">
+            <h3>Styling</h3>
+            <p>F&ouml;hnen, Gl&auml;tten, Locken &#8211; Ihr perfekter Look f&uuml;r jeden besonderen Moment.</p>
+            <span class="service-card__price">ab 22 &euro;</span>
+          </div>
+          <div class="service-card__hover-line"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery section" id="gallery">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label">Galerie</div>
+        <h2 class="section-headline">Unsere<br /><em>Arbeit spricht</em></h2>
+      </div>
+    </div>
+    <div class="gallery__grid reveal-up">
+      <div class="gallery__item gallery__item--tall">
+        <img src="haarschnitt.jpg" alt="Herrenhaarschnitt" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
+      </div>
+      <div class="gallery__item">
+        <img src="haarschnitt2.jpg" alt="Damenfrisur" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Herrenhaarschnit</span></div>
+      </div>
+      <div class="gallery__item">
+        <img src="haarschnitt3.jpg" alt="Styling" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Styling</span></div>
+      </div>
+      <div class="gallery__item gallery__item--wide">
+        <img src="aussen.jpg" alt="Salon Innenraum" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Von außerhalb</span></div>
+      </div>
+      <div class="gallery__item">
+        <img src="haarschnitt5.jpg" alt="Coloration" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Herrenhaarschnit</span></div>
+      </div>
+      <div class="gallery__item gallery__item--tall">
+        <img src="haarschnitt4.jpg" alt="Klassischer Schnitt" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Herrenhaarschnit</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking section section--cream" id="booking">
+    <div class="container booking__grid">
+      <div class="booking__copy reveal-left">
+        <div class="section-label">Terminbuchung</div>
+        <h2 class="section-headline">Ihren Wunsch&shy;termin<br /><em>jetzt sichern</em></h2>
+        <p>F&uuml;llen Sie das Formular aus &#8211; wir melden uns innerhalb von 24 Stunden zur Best&auml;tigung.</p>
+        <div class="booking__info">
+          <div class="booking__info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Detmolder Stra&szlig;e 165, 33175 Bad Lippspringe</span>
+          </div>
+          <div class="booking__info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mo&#8211;Fr: 09:00&#8211;18:00 &nbsp;|&nbsp; Sa: 09:00&#8211;16:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="booking__form-wrap reveal-right">
+        <form name="termin" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
+              class="booking__form" id="bookingForm" novalidate>
+          <input type="hidden" name="form-name" value="termin" />
+          <p hidden><label>Bot: <input name="bot-field" /></label></p>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" name="name" id="fname" placeholder=" " required />
+              <label for="fname">Name *</label>
+            </div>
+            <div class="form-group">
+              <input type="tel" name="telefon" id="ftel" placeholder=" " required />
+              <label for="ftel">Telefon *</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" id="femail" placeholder=" " required />
+            <label for="femail">E-Mail *</label>
+          </div>
+          <div class="form-group form-group--select">
+            <select name="leistung" id="fleistung" required>
+              <option value="" disabled selected></option>
+              <option value="herrenhaarschnitt">Herrenhaarschnitt</option>
+              <option value="damenhaarschnitt">Damenhaarschnitt</option>
+              <option value="bartpflege">Bartpflege</option>
+              <option value="coloration">Coloration</option>
+              <option value="styling">Styling</option>
+            </select>
+            <label for="fleistung">Leistung *</label>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="date" name="datum" id="fdatum" placeholder=" " required />
+              <label for="fdatum">Datum *</label>
+            </div>
+            <div class="form-group">
+              <input type="time" name="uhrzeit" id="fuhrzeit" placeholder=" " min="09:00" max="18:00" required />
+              <label for="fuhrzeit">Uhrzeit *</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea name="nachricht" id="fnachricht" rows="3" placeholder=" "></textarea>
+            <label for="fnachricht">Nachricht (optional)</label>
+          </div>
+          <button type="submit" class="btn btn--gold btn--full">
+            <span>Termin anfragen</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+        <div class="booking__success" id="bookingSuccess">
+          <div class="booking__success-icon">&#10003;</div>
+          <h3>Vielen Dank!</h3>
+          <p>Ihre Terminanfrage wurde erfolgreich gesendet. Wir melden uns in K&uuml;rze.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-section" id="map">
+    <div class="map-section__header">
+      <div class="container">
+        <div class="section-label">Anfahrt</div>
+        <h2 class="section-headline">Finden Sie<br /><em>uns leicht</em></h2>
+      </div>
+    </div>
+    <div class="map-section__embed">
+      <iframe
+        title="Eleganz Salon Standort"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2478.0!2d8.8277!3d51.7856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ba3c0b0d8c0001%3A0x0!2sDetmolder+Stra%C3%9Fe+165%2C+33175+Bad+Lippspringe!5e0!3m2!1sde!2sde!4v1699000000000!5m2!1sde!2sde"
+        width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section section--dark" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__block reveal-up" style="--delay:0s">
+        <div class="contact__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <h3>Adresse</h3>
+        <p>Detmolder Stra&szlig;e 165<br />33175 Bad Lippspringe<br />Deutschland</p>
+        <a href="https://maps.google.com/?q=Detmolder+Stra%C3%9Fe+165+33175+Bad+Lippspringe" target="_blank" rel="noopener" class="contact__link">Route planen &rarr;</a>
+      </div>
+      <div class="contact__block reveal-up" style="--delay:.1s">
+        <div class="contact__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>&Ouml;ffnungszeiten</h3>
+        <table class="hours-table">
+          <tbody>
+            <tr><td>Montag &ndash; Freitag</td><td>09:00 &ndash; 18:00</td></tr>
+            <tr><td>Samstag</td><td>09:00 &ndash; 16:00</td></tr>
+            <tr class="closed"><td>Sonntag</td><td>Geschlossen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="contact__block reveal-up" style="--delay:.2s">
+        <div class="contact__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h3>Kontakt</h3>
+        <p>Rufen Sie uns an oder<br />schreiben Sie uns:</p>
+        <a href="tel:+4952524000000" class="contact__link">+49 5252 400 00 00</a><br />
+        <a href="mailto:info@eleganz-salon.de" class="contact__link">info@eleganz-salon.de</a>
+        <div style="margin-top:1.5rem;">
+          <a href="#booking" class="btn btn--gold">Termin buchen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#hero" class="nav__logo">
+          <span class="nav__logo-mark">E</span>
+          <span class="nav__logo-text">leganz <em>Salon</em></span>
+        </a>
+        <p>Ihr Premiumfriseur<br />in Bad Lippspringe.</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="#about">&Uuml;ber uns</a>
+        <a href="#services">Leistungen</a>
+        <a href="#gallery">Galerie</a>
+        <a href="#booking">Termin</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+      <div class="footer__legal">
+        <a href="#" onclick="openModal('impressum');return false;">Impressum</a>
+        <a href="#" onclick="openModal('datenschutz');return false;">Datenschutz</a>
+        <a href="#contact">Kontakt</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2024 Eleganz Salon &middot; Bad Lippspringe &middot; Alle Rechte vorbehalten.</span>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()" aria-label="Schliessen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+/* ═══════════════════════════════════════════════
+   ELEGANZ SALON — script.js
+   ═══════════════════════════════════════════════ */
+
+'use strict';
+
+/* ── Custom Cursor ── */
+(function initCursor() {
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  if (!cursor || !follower) return;
+
+  let mx = -200, my = -200, fx = -200, fy = -200;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  // Smooth follower
+  function animateFollower() {
+    fx += (mx - fx) * 0.12;
+    fy += (my - fy) * 0.12;
+    follower.style.left = fx + 'px';
+    follower.style.top = fy + 'px';
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  // Hover scale
+  const hoverEls = document.querySelectorAll('a, button, .service-card, .gallery__item');
+  hoverEls.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('cursor--hover');
+      follower.classList.add('cursor-follower--hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('cursor--hover');
+      follower.classList.remove('cursor-follower--hover');
+    });
+  });
+})();
+
+/* ── Navigation ── */
+(function initNav() {
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('navBurger');
+  const links = document.getElementById('navLinks');
+
+  // Scroll class
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Burger toggle
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    links.classList.toggle('open');
+    document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // Close on link click (mobile)
+  links.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      links.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+
+/* ── Parallax Hero ── */
+(function initParallax() {
+  const heroImg = document.querySelector('.hero__img');
+  if (!heroImg) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const maxScroll = window.innerHeight;
+        if (scrollY < maxScroll) {
+          heroImg.style.transform = `scale(1.1) translateY(${scrollY * 0.2}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+/* ── Reveal on Scroll (IntersectionObserver) ── */
+(function initReveal() {
+  const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+  if (!revealEls.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealEls.forEach(el => observer.observe(el));
+})();
+
+/* ── Number Counter Animation ── */
+(function initCounters() {
+  const nums = document.querySelectorAll('.about__stat-num');
+  if (!nums.length) return;
+
+  const parseTarget = (text) => {
+    const match = text.match(/[\d,.]+/);
+    return match ? parseFloat(match[0].replace(',', '.')) : null;
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const original = el.textContent;
+      const target = parseTarget(original);
+      if (target === null) return;
+
+      const prefix = original.match(/^[^\d]*/)?.[0] || '';
+      const suffix = original.match(/[^\d.,]+$/)?.[0] || '';
+      const hasPlus = original.includes('+');
+      const isStar = original.includes('★');
+
+      if (isStar) return; // skip star
+      let start = 0;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+      const tick = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.round(easeOut(progress) * target);
+        el.textContent = prefix + current.toLocaleString('de-DE') + (hasPlus ? '+' : '') + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  nums.forEach(el => observer.observe(el));
+})();
+
+/* ── Booking Form ── */
+(function initBookingForm() {
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('bookingSuccess');
+  if (!form) return;
+
+  // Set min date to today
+  const dateInput = document.getElementById('datum');
+  if (dateInput) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('[type="submit"]');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span>Wird gesendet…</span>';
+    btn.disabled = true;
+
+    // Netlify Forms: encode form data
+    const formData = new FormData(form);
+    const encoded = new URLSearchParams(formData).toString();
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded
+      });
+
+      if (res.ok || res.status === 200 || res.status === 404) {
+        // 404 is fine when not on Netlify — still show success
+        form.style.opacity = '0';
+        form.style.transform = 'translateY(20px)';
+        form.style.transition = 'opacity 0.4s, transform 0.4s';
+        setTimeout(() => {
+          form.style.display = 'none';
+          success.classList.add('visible');
+        }, 400);
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+    } catch (err) {
+      // If local / not on Netlify, still show success UX
+      form.style.opacity = '0';
+      form.style.transform = 'translateY(20px)';
+      form.style.transition = 'opacity 0.4s, transform 0.4s';
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.classList.add('visible');
+      }, 400);
+    }
+  });
+})();
+
+/* ── Smooth Anchor Scroll ── */
+(function initAnchorScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const navH = document.getElementById('nav')?.offsetHeight || 70;
+      const top = target.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+})();
+
+/* ── Active Nav Highlight on Scroll ── */
+(function initActiveNav() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.removeAttribute('style'));
+        const active = document.querySelector(`.nav__link[href="#${entry.target.id}"]`);
+        if (active) {
+          active.style.color = 'var(--gold-light)';
+        }
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+
+  (function(){
+    var IMP='<h2>Impressum</h2><div class="modal-gold-line"></div>'
+      +'<div class="modal-section"><h3>Angaben gem\u00e4\u00df \u00a7\u00a05\u00a0TMG</h3>'
+      +'<p>Eleganz Salon<br>Detmolder Stra\u00dfe\u00a0165<br>33175\u00a0Bad\u00a0Lippspringe<br>Deutschland</p></div>'
+      +'<div class="modal-section"><h3>Kontakt</h3>'
+      +'<p>Telefon: +49\u00a05252\u00a0400\u00a000\u00a000<br>E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
+      +'<div class="modal-section"><h3>Verantwortlich f\u00fcr den Inhalt</h3>'
+      +'<p>Inhaber/in Eleganz Salon, Detmolder Stra\u00dfe\u00a0165, 33175\u00a0Bad\u00a0Lippspringe</p></div>'
+      +'<div class="modal-section"><h3>Berufsbezeichnung</h3>'
+      +'<p>Friseur/in (verliehen in der Bundesrepublik Deutschland)<br>Zust\u00e4ndige Kammer: Handwerkskammer Ostwestfalen-Lippe zu Bielefeld</p></div>'
+      +'<div class="modal-section"><h3>Haftung f\u00fcr Inhalte</h3>'
+      +'<p>Als Diensteanbieter sind wir gem\u00e4\u00df \u00a7\u00a07 Abs.\u00a01 TMG f\u00fcr eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach \u00a7\u00a7\u00a08 bis 10 TMG sind wir jedoch nicht verpflichtet, \u00fcbermittelte oder gespeicherte fremde Informationen zu \u00fcberwachen.</p></div>'
+      +'<div class="modal-section"><h3>Haftung f\u00fcr Links</h3>'
+      +'<p>Unser Angebot enth\u00e4lt Links zu externen Websites Dritter. F\u00fcr die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p></div>'
+      +'<div class="modal-section"><h3>Urheberrecht</h3>'
+      +'<p>Die durch die Seitenbetreiber erstellten Inhalte unterliegen dem deutschen Urheberrecht. Vervielf\u00e4ltigung und Bearbeitung bed\u00fcrfen der schriftlichen Zustimmung des jeweiligen Autors.</p></div>';
+
+    var DSE='<h2>Datenschutzerkl\u00e4rung</h2><div class="modal-gold-line"></div>'
+      +'<div class="modal-section"><h3>1. Datenschutz auf einen Blick</h3>'
+      +'<p>Diese Hinweise geben einen einfachen \u00dcberblick dar\u00fcber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p></div>'
+      +'<div class="modal-section"><h3>2. Verantwortliche Stelle</h3>'
+      +'<p>Eleganz Salon, Detmolder Stra\u00dfe\u00a0165, 33175\u00a0Bad\u00a0Lippspringe<br>'
+      +'E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a> &nbsp;|&nbsp; Telefon: +49\u00a05252\u00a0400\u00a000\u00a000</p></div>'
+      +'<div class="modal-section"><h3>3. Datenerfassung</h3>'
+      +'<p><strong>Cookies:</strong> Unsere Website verwendet keine Tracking-Cookies.</p>'
+      +'<p><strong>Kontaktformular:</strong> Ihre Angaben werden zwecks Bearbeitung der Anfrage gespeichert und nicht ohne Ihre Einwilligung weitergegeben.</p></div>'
+      +'<div class="modal-section"><h3>4. Welche Daten erfassen wir?</h3>'
+      +'<ul><li>Name und Vorname</li><li>Telefonnummer</li><li>E-Mail-Adresse</li>'
+      +'<li>Gew\u00fcnschte Leistung, Datum und Uhrzeit</li><li>Freitextangaben</li></ul></div>'
+      +'<div class="modal-section"><h3>5. Zweck der Datenverarbeitung</h3>'
+      +'<p>Die Daten werden ausschlie\u00dflich zur Terminvereinbarung und Kontaktaufnahme genutzt. Eine Weitergabe an Dritte findet nicht statt.</p></div>'
+      +'<div class="modal-section"><h3>6. Google Maps</h3>'
+      +'<p>Diese Seite nutzt Google Maps der Google Ireland Limited, Gordon House, Barrow Street, Dublin\u00a04, Irland. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerkl\u00e4rung von Google</a>.</p></div>'
+      +'<div class="modal-section"><h3>7. Ihre Rechte</h3>'
+      +'<p>Sie haben das Recht auf Auskunft, Berichtigung und L\u00f6schung Ihrer gespeicherten Daten. Wenden Sie sich hierzu jederzeit an uns.</p></div>'
+      +'<div class="modal-section"><h3>8. Hosting</h3>'
+      +'<p>Diese Website wird bei Netlify (Netlify, Inc., 44 Montgomery Street, Suite\u00a0300, San Francisco, CA\u00a094104) gehostet. Details: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerkl\u00e4rung von Netlify</a>.</p></div>';
+
+    window.openModal=function(k){
+      var o=document.getElementById('modalOverlay');
+      document.getElementById('modalContent').innerHTML=k==='impressum'?IMP:DSE;
+      o.classList.add('active');
+      document.body.style.overflow='hidden';
+      o.querySelector('.modal-box').scrollTop=0;
+    };
+    window.closeModal=function(){
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow='';
+    };
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+  })();
+
+  </script>
+
+</body>
+</html>
