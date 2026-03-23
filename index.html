@@ -4,38 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Friseur in Bad Lippspringe &#8211; Eleganz Salon</title>
-
   <meta name="description" content="Moderner Friseursalon in Bad Lippspringe. Eleganz Salon bietet Herrenhaarschnitte, Damenhaarschnitte, Styling und professionelle Haarpflege." />
   <meta name="keywords" content="Friseur Bad Lippspringe, Herrenfriseur Bad Lippspringe, Damenfriseur Bad Lippspringe, Haarschnitt Bad Lippspringe" />
-
   <meta property="og:title" content="Friseur in Bad Lippspringe &#8211; Eleganz Salon" />
   <meta property="og:description" content="Moderner Friseursalon in Bad Lippspringe. Eleganz Salon bietet Herrenhaarschnitte, Damenhaarschnitte, Styling und professionelle Haarpflege." />
   <meta property="og:type" content="website" />
-
-  <!-- Schema Markup für Google -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HairSalon",
-    "name": "Eleganz Salon",
-    "url": "https://eleganz-salon.de",
-    "telephone": "+49 5252 400 00 00",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Detmolder Straße 165",
-      "addressLocality": "Bad Lippspringe",
-      "postalCode": "33175",
-      "addressCountry": "DE"
-    },
-    "priceRange": "€€"
-  }
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
   <style>
+
 /* ═══════════════════════════════════════════════
    ELEGANZ SALON — Premium CSS
    ═══════════════════════════════════════════════ */
@@ -73,42 +51,18 @@ body {
   color: var(--black);
   line-height: 1.65;
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 img { display: block; max-width: 100%; height: auto; }
 a { text-decoration: none; color: inherit; }
-button { cursor: none; font-family: var(--ff-body); }
+button { cursor: pointer; font-family: var(--ff-body); }
 
 /* ── Custom Cursor ── */
-.cursor {
-  width: 10px; height: 10px;
-  background: var(--gold);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform 0.1s, background 0.3s, width 0.3s, height 0.3s;
-}
-.cursor-follower {
-  width: 36px; height: 36px;
-  border: 1.5px solid var(--gold);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform 0.35s var(--ease-out), opacity 0.3s, width 0.4s var(--ease-out), height 0.4s var(--ease-out);
-  opacity: 0.7;
-}
-body:hover .cursor { opacity: 1; }
-.cursor--hover { width: 20px; height: 20px; background: var(--gold-dark); }
-.cursor-follower--hover { width: 64px; height: 64px; opacity: 0.3; }
 
-@media (hover: none) {
-  .cursor, .cursor-follower { display: none; }
-  body { cursor: auto; }
-  button { cursor: pointer; }
-}
 
 /* ── Container ── */
 .container {
@@ -168,26 +122,31 @@ body:hover .cursor { opacity: 1; }
   position: relative;
   overflow: hidden;
   transition: color 0.35s, transform 0.2s;
-  cursor: none;
 }
 .btn::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--gold-dark);
+  background: #b8965e;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.45s var(--ease-out);
   z-index: 0;
 }
 .btn:hover::after { transform: scaleX(1); }
-.btn > * { position: relative; z-index: 1; }
+/* Ensure ALL text/icon children sit above the ::after overlay */
+.btn > *, .btn svg, .btn span {
+  position: relative;
+  z-index: 1;
+}
 .btn svg { width: 1em; height: 1em; }
 
 .btn--gold {
   background: var(--gold);
-  color: var(--black);
+  color: var(--black) !important;
 }
+.btn--gold:hover, .btn--gold:focus, .btn--gold:active { color: var(--black) !important; }
+.btn--gold span, .btn--gold:hover span { color: var(--black) !important; position: relative; z-index: 2; }
 .btn--ghost {
   background: transparent;
   color: var(--white);
@@ -291,40 +250,105 @@ body:hover .cursor { opacity: 1; }
 .nav__burger {
   display: none;
   flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px;
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1002;
+  transition: background 0.3s, border-color 0.3s;
 }
+.nav__burger:hover { background: rgba(198,167,110,0.12); border-color: rgba(198,167,110,0.3); }
 .nav__burger span {
   display: block;
-  width: 24px; height: 2px;
+  width: 20px; height: 1.5px;
   background: var(--white);
-  transition: transform 0.35s, opacity 0.25s;
+  border-radius: 2px;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.25s, width 0.3s;
 }
-.nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav__burger.open span:nth-child(2) { opacity: 0; }
-.nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav__burger.open { background: rgba(198,167,110,0.15); border-color: rgba(198,167,110,0.4); }
+.nav__burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav__burger.open span:nth-child(2) { opacity: 0; width: 0; }
+.nav__burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
 @media (max-width: 768px) {
+  .nav { padding: 1rem var(--pad-x); }
+  .nav.scrolled { padding: 0.75rem var(--pad-x); }
+  .nav__logo { font-size: 1.15rem; z-index: 1002; position: relative; }
+  .nav__logo-mark { font-size: 1.9rem; }
   .nav__burger { display: flex; }
+
   .nav__links {
     position: fixed;
-    inset: 0; top: 0;
+    top: 0; right: 0; bottom: 0;
+    width: min(80vw, 320px);
     flex-direction: column;
     justify-content: center;
-    gap: 2.5rem;
-    background: var(--black);
+    align-items: flex-start;
+    gap: 0;
+    padding: 6rem 2.5rem 3rem;
+    background: #0d0d0d;
+    border-left: 1px solid rgba(198,167,110,0.12);
     transform: translateX(100%);
-    transition: transform 0.55s var(--ease-out);
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
     pointer-events: none;
+    z-index: 1000;
+    list-style: none;
+    overflow-y: auto;
   }
+  .nav__links li { width: 100%; }
+  .nav__links li + li { border-top: 1px solid rgba(255,255,255,0.05); }
   .nav__links.open {
     transform: translateX(0);
     pointer-events: all;
   }
-  .nav__link { font-size: 1.1rem; }
-  .nav__link--cta { padding: 0.9em 2.2em; }
+  /* Backdrop */
+  .nav__links::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .nav__links.open::before { opacity: 1; pointer-events: all; }
+
+  .nav__link {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.65);
+    padding: 1.1rem 0;
+    transition: color 0.3s, padding-left 0.3s;
+  }
+  .nav__link::after { display: none; }
+  .nav__link:hover { color: var(--gold-light); padding-left: 0.5rem; }
+  .nav__link--cta {
+    display: inline-flex;
+    margin-top: 2rem;
+    padding: 0.85em 2em;
+    font-size: 0.75rem;
+  }
+
+  /* Staggered link animation */
+  .nav__links.open li:nth-child(1) .nav__link { animation: slideInLink 0.4s 0.1s both; }
+  .nav__links.open li:nth-child(2) .nav__link { animation: slideInLink 0.4s 0.17s both; }
+  .nav__links.open li:nth-child(3) .nav__link { animation: slideInLink 0.4s 0.24s both; }
+  .nav__links.open li:nth-child(4) .nav__link { animation: slideInLink 0.4s 0.31s both; }
+  .nav__links.open li:nth-child(5) .nav__link { animation: slideInLink 0.4s 0.38s both; }
+}
+@keyframes slideInLink {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ════════════════════════════════════
@@ -332,6 +356,7 @@ body:hover .cursor { opacity: 1; }
 ════════════════════════════════════ */
 .hero {
   position: relative;
+  min-height: 100vh;
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -345,9 +370,10 @@ body:hover .cursor { opacity: 1; }
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  will-change: transform;
-  transform: scale(1.1);
-  transition: transform 0.1s linear;
+  transform: scale(1.08);
+}
+@media (hover: none) {
+  .hero__img { transform: none; }
 }
 .hero__overlay {
   position: absolute; inset: 0;
@@ -597,7 +623,7 @@ body:hover .cursor { opacity: 1; }
   padding: 3rem 2.5rem;
   overflow: hidden;
   transition: background 0.5s;
-  cursor: none;
+  cursor: pointer;
 }
 .service-card:hover { background: rgba(198,167,110,0.06); }
 .service-card__hover-line {
@@ -985,18 +1011,27 @@ body:hover .cursor { opacity: 1; }
 ════════════════════════════════════ */
 @media (max-width: 768px) {
   .hero__headline { font-size: clamp(2.2rem, 10vw, 3.5rem); }
-
+  .hero__content { padding: 7rem var(--pad-x) 5rem; }
   .services__grid { grid-template-columns: 1fr; gap: 1px; }
-
   .section-headline { font-size: clamp(2rem, 8vw, 3rem); }
-
   .about__badge { right: 0.5rem; bottom: 1rem; }
+  .service-card { padding: 2rem 1.75rem; }
+  .booking__form { padding: 1.75rem; }
+  .contact__block { padding: 2rem 1.5rem; }
+  .footer__inner { flex-direction: column; gap: 1.5rem; }
+  .footer__nav, .footer__legal { flex-wrap: wrap; gap: 0.5rem 1.5rem; }
 }
 
 @media (max-width: 400px) {
-  .hero__actions { flex-direction: column; }
-  .btn { justify-content: center; }
+  .hero__actions { flex-direction: column; width: 100%; }
+  .btn { justify-content: center; width: 100%; }
+  .hero__eyebrow { font-size: 0.6rem; gap: 0.6rem; }
+  .hero__line { width: 24px; }
 }
+
+/* Prevent layout shift / reflow during scroll on all devices */
+*, *::before, *::after { -webkit-tap-highlight-color: transparent; }
+img, video { max-width: 100%; height: auto; }
 
 
   /* ── Modal ── */
@@ -1047,12 +1082,11 @@ body:hover .cursor { opacity: 1; }
   .modal-content a:hover{color:var(--gold);}
   .modal-section{margin-bottom:1.5rem;}
 
+  
   </style>
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursorFollower"></div>
 
   <!-- NAV -->
   <nav class="nav" id="nav">
@@ -1088,17 +1122,17 @@ body:hover .cursor { opacity: 1; }
         <span>Bad Lippspringe &middot; Seit 2010</span>
         <span class="hero__line"></span>
       </div>
-     <h1 class="hero__headline">
+      <h1 class="hero__headline">
         Eleganz Salon<br />
-      <em>Friseur in Bad Lippspringe</em>
-    </h1>
+        <em>Perfekte Schnitte.<br />Perfekter Stil.</em>
+      </h1>
       <p class="hero__sub">
         Ihr moderner Friseursalon in Bad Lippspringe f&uuml;r hochwertige<br class="br-desktop" />
         Haarschnitte und Styling.
       </p>
       <div class="hero__actions">
-        <a href="#booking" class="btn btn--gold">Termin buchen</a>
-        <a href="#services" class="btn btn--ghost">Leistungen ansehen</a>
+        <a href="#booking" class="btn btn--gold"><span>Termin buchen</span></a>
+        <a href="#services" class="btn btn--ghost"><span>Leistungen ansehen</span></a>
       </div>
     </div>
     <div class="hero__scroll-hint">
@@ -1145,7 +1179,7 @@ body:hover .cursor { opacity: 1; }
         <p class="about__text">Mit Leidenschaft, Pr&auml;zision und einem tiefen Verst&auml;ndnis f&uuml;r aktuelle Trends bieten wir Ihnen ein Erlebnis, das weit &uuml;ber einen klassischen Salonbesuch hinausgeht.</p>
         <div class="about__stats">
           <div class="about__stat">
-            <span class="about__stat-num">300</span>
+            <span class="about__stat-num">300+</span>
             <span class="about__stat-label">Zufriedene Kunden</span>
           </div>
           <div class="about__stat">
@@ -1153,7 +1187,7 @@ body:hover .cursor { opacity: 1; }
             <span class="about__stat-label">Google Bewertung</span>
           </div>
         </div>
-        <a href="#booking" class="btn btn--gold">Termin vereinbaren</a>
+        <a href="#booking" class="btn btn--gold"><span>Termin vereinbaren</span></a>
       </div>
     </div>
   </section>
@@ -1266,24 +1300,24 @@ body:hover .cursor { opacity: 1; }
         <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
       </div>
       <div class="gallery__item">
-        <img src="haarschnitt2.jpg" alt="Damenfrisur" loading="lazy" />
-        <div class="gallery__item-overlay"><span>Herrenhaarschnit</span></div>
+        <img src="haarschnitt2.jpg" alt="Herrenhaarschnitt" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
       </div>
       <div class="gallery__item">
         <img src="haarschnitt3.jpg" alt="Styling" loading="lazy" />
         <div class="gallery__item-overlay"><span>Styling</span></div>
       </div>
       <div class="gallery__item gallery__item--wide">
-        <img src="aussen.jpg" alt="Salon Innenraum" loading="lazy" />
-        <div class="gallery__item-overlay"><span>Von außerhalb</span></div>
+        <img src="aussen.jpg" alt="Von Aussen" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Von aussen</span></div>
       </div>
       <div class="gallery__item">
-        <img src="haarschnitt5.jpg" alt="Coloration" loading="lazy" />
-        <div class="gallery__item-overlay"><span>Herrenhaarschnit</span></div>
+        <img src="haarschnitt4.jpg" alt="Coloration" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
       </div>
       <div class="gallery__item gallery__item--tall">
-        <img src="haarschnitt4.jpg" alt="Klassischer Schnitt" loading="lazy" />
-        <div class="gallery__item-overlay"><span>Herrenhaarschnit</span></div>
+        <img src="damenhaarschnitt.png" alt="Damenhaarschnitt" loading="lazy" />
+        <div class="gallery__item-overlay"><span>Damenhaarschnitt</span></div>
       </div>
     </div>
   </section>
@@ -1294,7 +1328,7 @@ body:hover .cursor { opacity: 1; }
       <div class="booking__copy reveal-left">
         <div class="section-label">Terminbuchung</div>
         <h2 class="section-headline">Ihren Wunsch&shy;termin<br /><em>jetzt sichern</em></h2>
-        <p>F&uuml;llen Sie das Formular aus &#8211; wir melden uns innerhalb von 24 Stunden zur Best&auml;tigung.</p>
+        <p>F&uuml;llen Sie das Formular aus &#8211; wir melden uns so schnell wie möglich.</p>
         <div class="booking__info">
           <div class="booking__info-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -1413,9 +1447,15 @@ body:hover .cursor { opacity: 1; }
         <h3>Kontakt</h3>
         <p>Rufen Sie uns an oder<br />schreiben Sie uns:</p>
         <a href="tel:+4952524000000" class="contact__link">+49 5252 400 00 00</a><br />
-        <a href="mailto:info@eleganz-salon.de" class="contact__link">info@eleganz-salon.de</a>
+        <a href="https://www.instagram.com/eleganzsalonbadlippspringe" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="contact__link">
+          Instagram: @eleganzsalonbadlippspringe
+        </a>
+
         <div style="margin-top:1.5rem;">
-          <a href="#booking" class="btn btn--gold">Termin buchen</a>
+          <a href="#booking" class="btn btn--gold"><span>Termin buchen</span></a>
         </div>
       </div>
     </div>
@@ -1462,49 +1502,7 @@ body:hover .cursor { opacity: 1; }
   </div>
 
   <script>
-/* ═══════════════════════════════════════════════
-   ELEGANZ SALON — script.js
-   ═══════════════════════════════════════════════ */
-
 'use strict';
-
-/* ── Custom Cursor ── */
-(function initCursor() {
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  if (!cursor || !follower) return;
-
-  let mx = -200, my = -200, fx = -200, fy = -200;
-
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-
-  // Smooth follower
-  function animateFollower() {
-    fx += (mx - fx) * 0.12;
-    fy += (my - fy) * 0.12;
-    follower.style.left = fx + 'px';
-    follower.style.top = fy + 'px';
-    requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
-
-  // Hover scale
-  const hoverEls = document.querySelectorAll('a, button, .service-card, .gallery__item');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('cursor--hover');
-      follower.classList.add('cursor-follower--hover');
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('cursor--hover');
-      follower.classList.remove('cursor-follower--hover');
-    });
-  });
-})();
 
 /* ── Navigation ── */
 (function initNav() {
@@ -1534,12 +1532,32 @@ body:hover .cursor { opacity: 1; }
       document.body.style.overflow = '';
     });
   });
+
+  // Close when clicking the backdrop (::before pseudo)
+  links.addEventListener('click', (e) => {
+    if (e.target === links) {
+      burger.classList.remove('open');
+      links.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      burger.classList.remove('open');
+      links.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
 })();
 
-/* ── Parallax Hero ── */
+/* ── Parallax Hero (desktop only) ── */
 (function initParallax() {
   const heroImg = document.querySelector('.hero__img');
   if (!heroImg) return;
+  // Disable on touch / mobile to prevent jank
+  if (window.matchMedia('(hover: none), (max-width: 768px)').matches) return;
 
   let ticking = false;
   window.addEventListener('scroll', () => {
@@ -1548,7 +1566,7 @@ body:hover .cursor { opacity: 1; }
         const scrollY = window.scrollY;
         const maxScroll = window.innerHeight;
         if (scrollY < maxScroll) {
-          heroImg.style.transform = `scale(1.1) translateY(${scrollY * 0.2}px)`;
+          heroImg.style.transform = `scale(1.08) translateY(${scrollY * 0.18}px)`;
         }
         ticking = false;
       });
@@ -1583,8 +1601,12 @@ body:hover .cursor { opacity: 1; }
   if (!nums.length) return;
 
   const parseTarget = (text) => {
+    // Strip thousand-separators (dots in German), keep value as integer
     const match = text.match(/[\d,.]+/);
-    return match ? parseFloat(match[0].replace(',', '.')) : null;
+    if (!match) return null;
+    // Remove all dots and commas used as thousand separators, parse as integer
+    const clean = match[0].replace(/[.,]/g, '');
+    return parseInt(clean, 10) || null;
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -1695,79 +1717,80 @@ body:hover .cursor { opacity: 1; }
     });
   });
 })();
-
 /* ── Active Nav Highlight on Scroll ── */
 (function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(l => l.removeAttribute('style'));
         const active = document.querySelector(`.nav__link[href="#${entry.target.id}"]`);
-        if (active) {
-          active.style.color = 'var(--gold-light)';
-        }
+        if (active) active.style.color = 'var(--gold-light)';
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
-
   sections.forEach(s => observer.observe(s));
 })();
 
+/* ── Modals ── */
+(function(){
+  var IMP='<h2>Impressum</h2><div class="modal-gold-line"></div>'
+    +'<div class="modal-section"><h3>Angaben gemäß § 5 TMG</h3>'
+    +'<p>Eleganz Salon<br>Detmolder Straße 165<br>33175 Bad Lippspringe<br>Deutschland</p></div>'
+    +'<div class="modal-section"><h3>Kontakt</h3>'
+    +'<p>Telefon: +49 5252 400 00 00<br>E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
+    +'<div class="modal-section"><h3>Verantwortlich für den Inhalt</h3>'
+    +'<p>Inhaber/in Eleganz Salon, Detmolder Straße 165, 33175 Bad Lippspringe</p></div>'
+    +'<div class="modal-section"><h3>Berufsbezeichnung</h3>'
+    +'<p>Friseur/in (verliehen in der Bundesrepublik Deutschland)<br>'
+    +'Zuständige Kammer: Handwerkskammer Ostwestfalen-Lippe zu Bielefeld</p></div>'
+    +'<div class="modal-section"><h3>Haftung für Inhalte</h3>'
+    +'<p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte verantwortlich. '
+    +'Nach §§ 8 bis 10 TMG sind wir nicht verpflichtet, fremde Informationen zu überwachen.</p></div>'
+    +'<div class="modal-section"><h3>Haftung für Links</h3>'
+    +'<p>Für die Inhalte verlinkter Seiten ist stets der jeweilige Anbieter verantwortlich.</p></div>'
+    +'<div class="modal-section"><h3>Urheberrecht</h3>'
+    +'<p>Alle Inhalte unterliegen dem deutschen Urheberrecht. '
+    +'Vervielfältigung bedarf der schriftlichen Zustimmung des jeweiligen Autors.</p></div>';
 
-  (function(){
-    var IMP='<h2>Impressum</h2><div class="modal-gold-line"></div>'
-      +'<div class="modal-section"><h3>Angaben gem\u00e4\u00df \u00a7\u00a05\u00a0TMG</h3>'
-      +'<p>Eleganz Salon<br>Detmolder Stra\u00dfe\u00a0165<br>33175\u00a0Bad\u00a0Lippspringe<br>Deutschland</p></div>'
-      +'<div class="modal-section"><h3>Kontakt</h3>'
-      +'<p>Telefon: +49\u00a05252\u00a0400\u00a000\u00a000<br>E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
-      +'<div class="modal-section"><h3>Verantwortlich f\u00fcr den Inhalt</h3>'
-      +'<p>Inhaber/in Eleganz Salon, Detmolder Stra\u00dfe\u00a0165, 33175\u00a0Bad\u00a0Lippspringe</p></div>'
-      +'<div class="modal-section"><h3>Berufsbezeichnung</h3>'
-      +'<p>Friseur/in (verliehen in der Bundesrepublik Deutschland)<br>Zust\u00e4ndige Kammer: Handwerkskammer Ostwestfalen-Lippe zu Bielefeld</p></div>'
-      +'<div class="modal-section"><h3>Haftung f\u00fcr Inhalte</h3>'
-      +'<p>Als Diensteanbieter sind wir gem\u00e4\u00df \u00a7\u00a07 Abs.\u00a01 TMG f\u00fcr eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach \u00a7\u00a7\u00a08 bis 10 TMG sind wir jedoch nicht verpflichtet, \u00fcbermittelte oder gespeicherte fremde Informationen zu \u00fcberwachen.</p></div>'
-      +'<div class="modal-section"><h3>Haftung f\u00fcr Links</h3>'
-      +'<p>Unser Angebot enth\u00e4lt Links zu externen Websites Dritter. F\u00fcr die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p></div>'
-      +'<div class="modal-section"><h3>Urheberrecht</h3>'
-      +'<p>Die durch die Seitenbetreiber erstellten Inhalte unterliegen dem deutschen Urheberrecht. Vervielf\u00e4ltigung und Bearbeitung bed\u00fcrfen der schriftlichen Zustimmung des jeweiligen Autors.</p></div>';
+  var DSE='<h2>Datenschutzerklärung</h2><div class="modal-gold-line"></div>'
+    +'<div class="modal-section"><h3>1. Datenschutz auf einen Blick</h3>'
+    +'<p>Diese Hinweise geben einen Überblick darüber, was mit Ihren personenbezogenen Daten passiert.</p></div>'
+    +'<div class="modal-section"><h3>2. Verantwortliche Stelle</h3>'
+    +'<p>Eleganz Salon, Detmolder Straße 165, 33175 Bad Lippspringe<br>'
+    +'E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
+    +'<div class="modal-section"><h3>3. Datenerfassung</h3>'
+    +'<p><strong>Cookies:</strong> Keine Tracking-Cookies.</p>'
+    +'<p><strong>Kontaktformular:</strong> Ihre Daten werden nur zur Bearbeitung Ihrer Anfrage gespeichert.</p></div>'
+    +'<div class="modal-section"><h3>4. Erfasste Daten</h3>'
+    +'<ul><li>Name</li><li>Telefonnummer</li><li>E-Mail</li><li>Leistung, Datum, Uhrzeit</li><li>Nachricht</li></ul></div>'
+    +'<div class="modal-section"><h3>5. Zweck</h3>'
+    +'<p>Daten werden ausschließlich zur Terminvereinbarung genutzt. Keine Weitergabe an Dritte.</p></div>'
+    +'<div class="modal-section"><h3>6. Google Maps</h3>'
+    +'<p>Wir nutzen Google Maps (Google Ireland Limited). Details: '
+    +'<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung Google</a>.</p></div>'
+    +'<div class="modal-section"><h3>7. Ihre Rechte</h3>'
+    +'<p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten.</p></div>'
+    +'<div class="modal-section"><h3>8. Hosting</h3>'
+    +'<p>Hosting bei Netlify Inc. Details: '
+    +'<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerklärung Netlify</a>.</p></div>';
 
-    var DSE='<h2>Datenschutzerkl\u00e4rung</h2><div class="modal-gold-line"></div>'
-      +'<div class="modal-section"><h3>1. Datenschutz auf einen Blick</h3>'
-      +'<p>Diese Hinweise geben einen einfachen \u00dcberblick dar\u00fcber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p></div>'
-      +'<div class="modal-section"><h3>2. Verantwortliche Stelle</h3>'
-      +'<p>Eleganz Salon, Detmolder Stra\u00dfe\u00a0165, 33175\u00a0Bad\u00a0Lippspringe<br>'
-      +'E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a> &nbsp;|&nbsp; Telefon: +49\u00a05252\u00a0400\u00a000\u00a000</p></div>'
-      +'<div class="modal-section"><h3>3. Datenerfassung</h3>'
-      +'<p><strong>Cookies:</strong> Unsere Website verwendet keine Tracking-Cookies.</p>'
-      +'<p><strong>Kontaktformular:</strong> Ihre Angaben werden zwecks Bearbeitung der Anfrage gespeichert und nicht ohne Ihre Einwilligung weitergegeben.</p></div>'
-      +'<div class="modal-section"><h3>4. Welche Daten erfassen wir?</h3>'
-      +'<ul><li>Name und Vorname</li><li>Telefonnummer</li><li>E-Mail-Adresse</li>'
-      +'<li>Gew\u00fcnschte Leistung, Datum und Uhrzeit</li><li>Freitextangaben</li></ul></div>'
-      +'<div class="modal-section"><h3>5. Zweck der Datenverarbeitung</h3>'
-      +'<p>Die Daten werden ausschlie\u00dflich zur Terminvereinbarung und Kontaktaufnahme genutzt. Eine Weitergabe an Dritte findet nicht statt.</p></div>'
-      +'<div class="modal-section"><h3>6. Google Maps</h3>'
-      +'<p>Diese Seite nutzt Google Maps der Google Ireland Limited, Gordon House, Barrow Street, Dublin\u00a04, Irland. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerkl\u00e4rung von Google</a>.</p></div>'
-      +'<div class="modal-section"><h3>7. Ihre Rechte</h3>'
-      +'<p>Sie haben das Recht auf Auskunft, Berichtigung und L\u00f6schung Ihrer gespeicherten Daten. Wenden Sie sich hierzu jederzeit an uns.</p></div>'
-      +'<div class="modal-section"><h3>8. Hosting</h3>'
-      +'<p>Diese Website wird bei Netlify (Netlify, Inc., 44 Montgomery Street, Suite\u00a0300, San Francisco, CA\u00a094104) gehostet. Details: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerkl\u00e4rung von Netlify</a>.</p></div>';
-
-    window.openModal=function(k){
-      var o=document.getElementById('modalOverlay');
-      document.getElementById('modalContent').innerHTML=k==='impressum'?IMP:DSE;
-      o.classList.add('active');
-      document.body.style.overflow='hidden';
-      o.querySelector('.modal-box').scrollTop=0;
-    };
-    window.closeModal=function(){
-      document.getElementById('modalOverlay').classList.remove('active');
-      document.body.style.overflow='';
-    };
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-  })();
+  window.openModal=function(k){
+    var o=document.getElementById('modalOverlay');
+    document.getElementById('modalContent').innerHTML=k==='impressum'?IMP:DSE;
+    o.classList.add('active');
+    document.body.style.overflow='hidden';
+    o.querySelector('.modal-box').scrollTop=0;
+  };
+  window.closeModal=function(){
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow='';
+  };
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') window.closeModal();
+  });
+})();
 
   </script>
 
