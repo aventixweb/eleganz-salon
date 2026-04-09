@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 \"/c/Users/bib/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"beauty salon elegant luxury premium service wellness hair\" --design-system -p \"Eleganz Salon\")",
+      "Bash(py --version)",
+      "Bash(py \"/c/Users/bib/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"beauty salon elegant luxury premium service wellness hair\" --design-system -p \"Eleganz Salon\")"
+    ]
+  }
+}
