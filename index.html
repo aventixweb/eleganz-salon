@@ -9,13 +9,20 @@
   <meta property="og:title" content="Friseur in Bad Lippspringe &#8211; Eleganz Salon" />
   <meta property="og:description" content="Moderner Friseursalon in Bad Lippspringe. Eleganz Salon bietet Herrenhaarschnitte, Damenhaarschnitte, Styling und professionelle Haarpflege." />
   <meta property="og:type" content="website" />
+
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com; frame-src https://www.google.com https://maps.google.com; connect-src 'self';" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
 
 /* ═══════════════════════════════════════════════
-   ELEGANZ SALON — Premium CSS
+   ELEGANZ SALON — Premium CSS v2
    ═══════════════════════════════════════════════ */
 
 /* ── Variables ── */
@@ -29,6 +36,8 @@
   --gray-100: #f0ede8;
   --gray-400: #9a9590;
   --gray-600: #5a5550;
+  --error: #c0392b;
+  --success: #27ae60;
 
   --ff-head: 'Playfair Display', Georgia, serif;
   --ff-body: 'Inter', sans-serif;
@@ -51,7 +60,6 @@ body {
   color: var(--black);
   line-height: 1.65;
   overflow-x: hidden;
-  cursor: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -61,8 +69,34 @@ img { display: block; max-width: 100%; height: auto; }
 a { text-decoration: none; color: inherit; }
 button { cursor: pointer; font-family: var(--ff-body); }
 
-/* ── Custom Cursor ── */
+/* ── Skip to Content (Accessibility) ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  background: var(--gold);
+  color: var(--black);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: top 0.3s;
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--gold-dark);
+  outline-offset: 2px;
+}
 
+/* ── Focus Visible (Accessibility) ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
 
 /* ── Container ── */
 .container {
@@ -122,6 +156,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   position: relative;
   overflow: hidden;
   transition: color 0.35s, transform 0.2s;
+  cursor: pointer;
 }
 .btn::after {
   content: '';
@@ -134,7 +169,6 @@ button { cursor: pointer; font-family: var(--ff-body); }
   z-index: 0;
 }
 .btn:hover::after { transform: scaleX(1); }
-/* Ensure ALL text/icon children sit above the ::after overlay */
 .btn > *, .btn svg, .btn span {
   position: relative;
   z-index: 1;
@@ -155,6 +189,12 @@ button { cursor: pointer; font-family: var(--ff-body); }
 .btn--ghost::after { background: rgba(255,255,255,0.1); }
 .btn--full { width: 100%; justify-content: center; }
 .btn:hover { transform: translateY(-2px); }
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn:disabled::after { transform: scaleX(0); }
 
 /* ── Reveal animations ── */
 .reveal-up, .reveal-left, .reveal-right {
@@ -176,7 +216,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
   padding: 1.4rem var(--pad-x);
-  transition: background 0.5s, padding 0.4s, backdrop-filter 0.5s;
+  transition: background 0.5s, padding 0.4s, backdrop-filter 0.5s, box-shadow 0.5s;
 }
 .nav.scrolled {
   background: rgba(11,11,11,0.92);
@@ -184,6 +224,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   -webkit-backdrop-filter: blur(20px);
   padding: 0.9rem var(--pad-x);
   border-bottom: 1px solid rgba(198,167,110,0.12);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
 }
 .nav__inner {
   max-width: var(--max-w);
@@ -285,53 +326,42 @@ button { cursor: pointer; font-family: var(--ff-body); }
 
   .nav__links {
     position: fixed;
-    top: 0; right: 0; bottom: 0;
-    width: min(80vw, 320px);
+    inset: 0;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 0;
-    padding: 6rem 2.5rem 3rem;
-    background: #0d0d0d;
-    border-left: 1px solid rgba(198,167,110,0.12);
-    transform: translateX(100%);
+    padding: 5rem 2.5rem 3rem;
+    background: rgba(11,11,11,0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: none;
+    transform: translateY(-100%);
     transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
     pointer-events: none;
     z-index: 1000;
     list-style: none;
     overflow-y: auto;
   }
-  .nav__links li { width: 100%; }
-  .nav__links li + li { border-top: 1px solid rgba(255,255,255,0.05); }
+  .nav__links li { width: auto; text-align: center; }
+  .nav__links li + li { border-top: none; }
   .nav__links.open {
-    transform: translateX(0);
+    transform: translateY(0);
     pointer-events: all;
   }
-  /* Backdrop */
-  .nav__links::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
-    z-index: -1;
-  }
-  .nav__links.open::before { opacity: 1; pointer-events: all; }
+  .nav__links::before { display: none; }
 
   .nav__link {
     display: block;
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
-    color: rgba(255,255,255,0.65);
-    padding: 1.1rem 0;
-    transition: color 0.3s, padding-left 0.3s;
+    font-size: 1.2rem;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.7);
+    padding: 1.2rem 0;
+    transition: color 0.3s;
   }
   .nav__link::after { display: none; }
-  .nav__link:hover { color: var(--gold-light); padding-left: 0.5rem; }
+  .nav__link:hover { color: var(--gold); }
   .nav__link--cta {
     display: inline-flex;
     margin-top: 2rem;
@@ -339,7 +369,6 @@ button { cursor: pointer; font-family: var(--ff-body); }
     font-size: 0.75rem;
   }
 
-  /* Staggered link animation */
   .nav__links.open li:nth-child(1) .nav__link { animation: slideInLink 0.4s 0.1s both; }
   .nav__links.open li:nth-child(2) .nav__link { animation: slideInLink 0.4s 0.17s both; }
   .nav__links.open li:nth-child(3) .nav__link { animation: slideInLink 0.4s 0.24s both; }
@@ -372,6 +401,22 @@ button { cursor: pointer; font-family: var(--ff-body); }
   object-position: center 20%;
   transform: scale(1.08);
 }
+
+/* ── Gold Border on all images (Premium Look) ── */
+.about__img-wrap,
+.gallery__item {
+  border: 3px solid rgba(198,167,110,0.5);
+  box-shadow: 0 0 12px rgba(198,167,110,0.1);
+}
+.about__img-wrap:hover,
+.gallery__item:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(198,167,110,0.2);
+}
+.service-card__icon {
+  border-bottom: 1px solid rgba(198,167,110,0.15);
+  padding-bottom: 1.5rem;
+}
 @media (hover: none) {
   .hero__img { transform: none; }
 }
@@ -392,6 +437,24 @@ button { cursor: pointer; font-family: var(--ff-body); }
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* Ambient glow effect */
+.hero__glow {
+  position: absolute;
+  z-index: 1;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(198,167,110,0.12) 0%, transparent 70%);
+  top: 20%; right: -10%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite alternate;
+}
+@keyframes glowPulse {
+  0% { opacity: 0.4; transform: scale(1); }
+  100% { opacity: 0.7; transform: scale(1.15); }
+}
+
 .hero__content {
   position: relative; z-index: 2;
   max-width: var(--max-w);
@@ -535,7 +598,6 @@ button { cursor: pointer; font-family: var(--ff-body); }
 }
 .about__img-wrap:hover img { transform: scale(1.04); }
 
-/* Decorative corner accents */
 .about__img-wrap::before,
 .about__img-wrap::after {
   content: '';
@@ -622,10 +684,13 @@ button { cursor: pointer; font-family: var(--ff-body); }
   background: rgba(255,255,255,0.03);
   padding: 3rem 2.5rem;
   overflow: hidden;
-  transition: background 0.5s;
+  transition: background 0.5s, box-shadow 0.5s;
   cursor: pointer;
 }
-.service-card:hover { background: rgba(198,167,110,0.06); }
+.service-card:hover {
+  background: rgba(198,167,110,0.06);
+  box-shadow: inset 0 0 60px rgba(198,167,110,0.04);
+}
 .service-card__hover-line {
   position: absolute;
   bottom: 0; left: 0;
@@ -665,6 +730,10 @@ button { cursor: pointer; font-family: var(--ff-body); }
   color: var(--gold);
   border: 1px solid rgba(198,167,110,0.25);
   padding: 0.35em 0.85em;
+  transition: background 0.3s, color 0.3s;
+}
+.service-card:hover .service-card__price {
+  background: rgba(198,167,110,0.12);
 }
 
 /* ════════════════════════════════════
@@ -683,6 +752,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   position: relative;
   overflow: hidden;
   background: var(--gray-100);
+  cursor: pointer;
 }
 .gallery__item--tall { grid-row: span 2; }
 .gallery__item--wide { grid-column: span 2; }
@@ -728,6 +798,136 @@ button { cursor: pointer; font-family: var(--ff-body); }
   }
   .gallery__item--tall,
   .gallery__item--wide { grid-column: auto; grid-row: auto; }
+}
+
+/* ════════════════════════════════════
+   LIGHTBOX
+════════════════════════════════════ */
+.lightbox {
+  position: fixed; inset: 0; z-index: 9500;
+  background: rgba(0,0,0,0.95);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);
+}
+.lightbox.active { opacity: 1; pointer-events: all; }
+.lightbox__img {
+  max-width: 90vw; max-height: 85vh;
+  object-fit: contain;
+  transform: scale(0.9);
+  transition: transform 0.4s var(--ease-out);
+}
+.lightbox.active .lightbox__img { transform: scale(1); }
+.lightbox__close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.lightbox__close:hover { background: rgba(198,167,110,0.2); transform: rotate(90deg); }
+.lightbox__close svg { width: 1.2em; height: 1.2em; }
+.lightbox__nav {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.lightbox__nav:hover { background: rgba(198,167,110,0.2); }
+.lightbox__nav svg { width: 1.2em; height: 1.2em; }
+.lightbox__nav--prev { left: 1.5rem; }
+.lightbox__nav--next { right: 1.5rem; }
+.lightbox__caption {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* ════════════════════════════════════
+   TESTIMONIALS
+════════════════════════════════════ */
+.testimonials {
+  position: relative;
+  overflow: hidden;
+}
+.testimonials__wrapper {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.testimonial-card {
+  text-align: center;
+  padding: 0 1rem;
+  display: none;
+}
+.testimonial-card.active { display: block; animation: fadeIn 0.6s var(--ease-out); }
+.testimonial-card__quote {
+  font-family: var(--ff-head);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin-bottom: 2rem;
+  position: relative;
+}
+.testimonial-card__quote::before {
+  content: '\201C';
+  font-family: var(--ff-head);
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: 0.3;
+  position: absolute;
+  top: -2.5rem; left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+}
+.testimonial-card__stars {
+  color: var(--gold);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+.testimonial-card__author {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.testimonial-card__role {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  margin-top: 0.3rem;
+}
+.testimonials__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+.testimonials__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gold);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+.testimonials__dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
 }
 
 /* ════════════════════════════════════
@@ -786,7 +986,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   font-family: var(--ff-body);
   font-size: 0.9rem;
   color: var(--black);
-  transition: border-color 0.3s, background 0.3s;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
   outline: none;
   appearance: none;
   -webkit-appearance: none;
@@ -797,6 +997,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
 .form-group select:focus {
   border-color: var(--gold);
   background: #faf8f4;
+  box-shadow: 0 0 0 3px rgba(198,167,110,0.1);
 }
 .form-group label {
   position: absolute;
@@ -822,6 +1023,22 @@ button { cursor: pointer; font-family: var(--ff-body); }
   text-transform: uppercase;
   color: var(--gold-dark);
 }
+
+/* Form validation states */
+.form-group--error input,
+.form-group--error textarea,
+.form-group--error select {
+  border-color: var(--error) !important;
+  background: #fdf2f2;
+}
+.form-group__error {
+  display: none;
+  font-size: 0.72rem;
+  color: var(--error);
+  margin-top: 0.35rem;
+  padding-left: 0.2rem;
+}
+.form-group--error .form-group__error { display: block; }
 
 .form-group--select .select-arrow {
   position: absolute;
@@ -889,6 +1106,39 @@ button { cursor: pointer; font-family: var(--ff-body); }
 }
 .map-section__embed:hover { filter: none; }
 .map-section__embed iframe { display: block; }
+
+/* Google Maps Consent Placeholder */
+.map-consent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  min-height: 400px;
+  background: var(--gray-100);
+  border: 2px dashed rgba(198,167,110,0.3);
+}
+.map-consent__icon {
+  width: 56px; height: 56px;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+.map-consent__icon svg { width: 100%; height: 100%; }
+.map-consent h3 {
+  font-family: var(--ff-head);
+  font-size: 1.3rem;
+  color: var(--black);
+  margin-bottom: 0.75rem;
+}
+.map-consent p {
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  max-width: 420px;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
 
 /* ════════════════════════════════════
    CONTACT
@@ -996,6 +1246,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   color: rgba(255,255,255,0.3);
   transition: color 0.3s;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .footer__legal a:hover { color: var(--gold-light); }
 .footer__bottom {
@@ -1005,6 +1256,154 @@ button { cursor: pointer; font-family: var(--ff-body); }
   letter-spacing: 0.05em;
   color: rgba(255,255,255,0.2);
 }
+
+/* ════════════════════════════════════
+   COOKIE CONSENT
+════════════════════════════════════ */
+.cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(11,11,11,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(198,167,110,0.2);
+  padding: 1.5rem var(--pad-x);
+  transform: translateY(100%);
+  transition: transform 0.5s var(--ease-out);
+}
+.cookie-banner.visible { transform: translateY(0); }
+.cookie-banner__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.cookie-banner__text {
+  flex: 1;
+  min-width: 280px;
+}
+.cookie-banner__text p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+.cookie-banner__text a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cookie-banner__text a:hover { color: var(--gold); }
+.cookie-banner__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.cookie-banner__btn {
+  padding: 0.7em 1.6em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.cookie-banner__btn:hover { transform: translateY(-1px); }
+.cookie-banner__btn--accept {
+  background: var(--gold);
+  color: var(--black);
+}
+.cookie-banner__btn--accept:hover { background: var(--gold-dark); }
+.cookie-banner__btn--decline {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.cookie-banner__btn--decline:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* ════════════════════════════════════
+   SCROLL TO TOP
+════════════════════════════════════ */
+.scroll-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 800;
+  width: 48px; height: 48px;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(198,167,110,0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s, background 0.3s;
+}
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.scroll-top:hover { background: var(--gold-dark); transform: translateY(-2px); }
+.scroll-top svg { width: 1.2em; height: 1.2em; }
+
+/* ════════════════════════════════════
+   MODAL
+════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(11,11,11,.78);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem; opacity: 0; pointer-events: none;
+  transition: opacity .4s cubic-bezier(.16,1,.3,1);
+}
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+.modal-box {
+  background: var(--white); max-width: 760px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  padding: clamp(2rem,5vw,3.5rem); position: relative;
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 40px 100px -20px rgba(0,0,0,.45);
+  transform: translateY(30px);
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+}
+.modal-overlay.active .modal-box { transform: translateY(0); }
+.modal-box::-webkit-scrollbar { width: 4px; }
+.modal-box::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+.modal-close {
+  position: sticky; top: 0; float: right;
+  background: var(--black); border: none;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); transition: background .3s, transform .3s;
+  cursor: pointer; margin-left: 1rem; margin-bottom: .5rem;
+}
+.modal-close:hover { background: var(--gold-dark); transform: rotate(90deg); }
+.modal-close svg { width: 1.1em; height: 1.1em; }
+.modal-content h2 {
+  font-family: var(--ff-head); font-size: clamp(1.6rem,4vw,2.2rem);
+  font-weight: 500; color: var(--black); margin-bottom: .4rem; padding-right: 3rem;
+}
+.modal-gold-line { width: 48px; height: 2px; background: var(--gold); margin-bottom: 2rem; }
+.modal-content h3 {
+  font-family: var(--ff-head); font-size: 1.05rem; font-weight: 600;
+  color: var(--black); margin: 2rem 0 .5rem;
+}
+.modal-content p, .modal-content li { font-size: .9rem; color: #5a5550; line-height: 1.8; }
+.modal-content ul { padding-left: 1.2rem; margin: .5rem 0; }
+.modal-content a { color: #a8874d; text-decoration: underline; }
+.modal-content a:hover { color: var(--gold); }
+.modal-section { margin-bottom: 1.5rem; }
 
 /* ════════════════════════════════════
    MOBILE REFINEMENTS
@@ -1020,6 +1419,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   .contact__block { padding: 2rem 1.5rem; }
   .footer__inner { flex-direction: column; gap: 1.5rem; }
   .footer__nav, .footer__legal { flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .scroll-top { bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; }
 }
 
 @media (max-width: 400px) {
@@ -1029,76 +1429,44 @@ button { cursor: pointer; font-family: var(--ff-body); }
   .hero__line { width: 24px; }
 }
 
-/* Prevent layout shift / reflow during scroll on all devices */
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .marquee__track { animation: none; }
+  .hero__img { transform: none; }
+  .reveal-up, .reveal-left, .reveal-right {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Prevent layout shift */
 *, *::before, *::after { -webkit-tap-highlight-color: transparent; }
 img, video { max-width: 100%; height: auto; }
 
-
-  /* ── Modal ── */
-  .modal-overlay {
-    position:fixed;inset:0;z-index:9000;
-    background:rgba(11,11,11,.78);
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    display:flex;align-items:center;justify-content:center;
-    padding:1.5rem;opacity:0;pointer-events:none;
-    transition:opacity .4s cubic-bezier(.16,1,.3,1);
-  }
-  .modal-overlay.active{opacity:1;pointer-events:all;}
-  .modal-box{
-    background:var(--white);max-width:760px;width:100%;
-    max-height:85vh;overflow-y:auto;
-    padding:clamp(2rem,5vw,3.5rem);position:relative;
-    border-top:3px solid var(--gold);
-    box-shadow:0 40px 100px -20px rgba(0,0,0,.45);
-    transform:translateY(30px);
-    transition:transform .45s cubic-bezier(.16,1,.3,1);
-    scrollbar-width:thin;scrollbar-color:var(--gold) transparent;
-  }
-  .modal-overlay.active .modal-box{transform:translateY(0);}
-  .modal-box::-webkit-scrollbar{width:4px;}
-  .modal-box::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
-  .modal-close{
-    position:sticky;top:0;float:right;
-    background:var(--black);border:none;
-    width:40px;height:40px;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--white);transition:background .3s,transform .3s;
-    cursor:pointer;margin-left:1rem;margin-bottom:.5rem;
-  }
-  .modal-close:hover{background:var(--gold-dark);transform:rotate(90deg);}
-  .modal-close svg{width:1.1em;height:1.1em;}
-  .modal-content h2{
-    font-family:var(--ff-head);font-size:clamp(1.6rem,4vw,2.2rem);
-    font-weight:500;color:var(--black);margin-bottom:.4rem;padding-right:3rem;
-  }
-  .modal-gold-line{width:48px;height:2px;background:var(--gold);margin-bottom:2rem;}
-  .modal-content h3{
-    font-family:var(--ff-head);font-size:1.05rem;font-weight:600;
-    color:var(--black);margin:2rem 0 .5rem;
-  }
-  .modal-content p,.modal-content li{font-size:.9rem;color:#5a5550;line-height:1.8;}
-  .modal-content ul{padding-left:1.2rem;margin:.5rem 0;}
-  .modal-content a{color:#a8874d;text-decoration:underline;}
-  .modal-content a:hover{color:var(--gold);}
-  .modal-section{margin-bottom:1.5rem;}
-
-  
   </style>
 </head>
 <body>
 
+  <!-- Skip to Content -->
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
   <!-- NAV -->
-  <nav class="nav" id="nav">
+  <nav class="nav" id="nav" aria-label="Hauptnavigation">
     <div class="nav__inner">
-      <a href="#hero" class="nav__logo">
-        <span class="nav__logo-mark">E</span>
+      <a href="#hero" class="nav__logo" aria-label="Eleganz Salon - Startseite">
+        <span class="nav__logo-mark" aria-hidden="true">E</span>
         <span class="nav__logo-text">leganz <em>Salon</em></span>
       </a>
-      <button class="nav__burger" id="navBurger" aria-label="Men&uuml; &ouml;ffnen">
+      <button class="nav__burger" id="navBurger" aria-label="Men&uuml; &ouml;ffnen" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav__links" id="navLinks">
+      <ul class="nav__links" id="navLinks" role="list">
         <li><a href="#about" class="nav__link">&Uuml;ber uns</a></li>
         <li><a href="#services" class="nav__link">Leistungen</a></li>
         <li><a href="#gallery" class="nav__link">Galerie</a></li>
@@ -1112,15 +1480,16 @@ img, video { max-width: 100%; height: auto; }
   <section class="hero" id="hero">
     <div class="hero__bg">
       <img src="innenraum.jpeg"
-           alt="Eleganz Salon &#8211; professioneller Haarschnitt" class="hero__img" loading="eager" />
+           alt="Eleganz Salon &#8211; professioneller Haarschnitt im modernen Salon" class="hero__img" loading="eager" fetchpriority="high" />
       <div class="hero__overlay"></div>
     </div>
-    <div class="hero__noise"></div>
+    <div class="hero__noise" aria-hidden="true"></div>
+    <div class="hero__glow" aria-hidden="true"></div>
     <div class="hero__content">
       <div class="hero__eyebrow">
-        <span class="hero__line"></span>
+        <span class="hero__line" aria-hidden="true"></span>
         <span>Bad Lippspringe &middot; Seit 2010</span>
-        <span class="hero__line"></span>
+        <span class="hero__line" aria-hidden="true"></span>
       </div>
       <h1 class="hero__headline">
         Eleganz Salon<br />
@@ -1135,7 +1504,7 @@ img, video { max-width: 100%; height: auto; }
         <a href="#services" class="btn btn--ghost"><span>Leistungen ansehen</span></a>
       </div>
     </div>
-    <div class="hero__scroll-hint">
+    <div class="hero__scroll-hint" aria-hidden="true">
       <div class="hero__scroll-line"></div>
       <span>Scroll</span>
     </div>
@@ -1159,13 +1528,16 @@ img, video { max-width: 100%; height: auto; }
     </div>
   </div>
 
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
   <!-- ABOUT -->
   <section class="about section" id="about">
     <div class="container about__grid">
       <div class="about__media reveal-left">
         <div class="about__img-wrap">
           <img src="cut.jpg"
-               alt="Eleganz Salon Innenraum" loading="lazy" />
+               alt="Friseur schneidet einem Kunden die Haare im Eleganz Salon" loading="lazy" />
           <div class="about__badge">
             <span class="about__badge-num">14</span>
             <span class="about__badge-label">Jahre<br />Erfahrung</span>
@@ -1202,7 +1574,7 @@ img, video { max-width: 100%; height: auto; }
       <div class="services__grid">
 
         <div class="service-card reveal-up" style="--delay:.05s">
-          <div class="service-card__icon">
+          <div class="service-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="24" cy="14" r="7" stroke="currentColor" stroke-width="1.5"/>
               <path d="M10 38c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1214,11 +1586,11 @@ img, video { max-width: 100%; height: auto; }
             <p>Klassisch oder modern &#8211; pr&auml;zise geschnitten und perfekt gestylt f&uuml;r jeden Anlass.</p>
             <span class="service-card__price">ab 25 &euro;</span>
           </div>
-          <div class="service-card__hover-line"></div>
+          <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
 
         <div class="service-card reveal-up" style="--delay:.12s">
-          <div class="service-card__icon">
+          <div class="service-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="24" cy="13" r="7" stroke="currentColor" stroke-width="1.5"/>
               <path d="M9 40c0-8.284 6.716-15 15-15s15 6.716 15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1230,11 +1602,11 @@ img, video { max-width: 100%; height: auto; }
             <p>Von kurz bis lang &#8211; individuell auf Sie abgestimmt, mit Beratung inklusive.</p>
             <span class="service-card__price">ab 35 &euro;</span>
           </div>
-          <div class="service-card__hover-line"></div>
+          <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
 
         <div class="service-card reveal-up" style="--delay:.19s">
-          <div class="service-card__icon">
+          <div class="service-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M16 12c0 0 2 8 8 8s8-8 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               <path d="M14 20s-4 4-4 10c0 4 2 6 4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1248,11 +1620,11 @@ img, video { max-width: 100%; height: auto; }
             <p>Professionelle Rasur und Bartformung f&uuml;r den perfekten Auftritt.</p>
             <span class="service-card__price">ab 18 &euro;</span>
           </div>
-          <div class="service-card__hover-line"></div>
+          <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
 
         <div class="service-card reveal-up" style="--delay:.26s">
-          <div class="service-card__icon">
+          <div class="service-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 36c3-8 14-24 24-24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               <path d="M12 12c10 0 24 11 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1264,11 +1636,11 @@ img, video { max-width: 100%; height: auto; }
             <p>Highlights, Balayage, Vollcoloration &#8211; lebendige Farben mit Premium-Produkten.</p>
             <span class="service-card__price">ab 55 &euro;</span>
           </div>
-          <div class="service-card__hover-line"></div>
+          <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
 
         <div class="service-card reveal-up" style="--delay:.33s">
-          <div class="service-card__icon">
+          <div class="service-card__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M24 8c-4 4-10 10-10 16 0 5.523 4.477 10 10 10s10-4.477 10-10c0-6-6-12-10-16z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
               <path d="M20 30c1 2 2 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -1279,7 +1651,7 @@ img, video { max-width: 100%; height: auto; }
             <p>F&ouml;hnen, Gl&auml;tten, Locken &#8211; Ihr perfekter Look f&uuml;r jeden besonderen Moment.</p>
             <span class="service-card__price">ab 22 &euro;</span>
           </div>
-          <div class="service-card__hover-line"></div>
+          <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
 
       </div>
@@ -1294,48 +1666,98 @@ img, video { max-width: 100%; height: auto; }
         <h2 class="section-headline">Unsere<br /><em>Arbeit spricht</em></h2>
       </div>
     </div>
-    <div class="gallery__grid reveal-up">
-      <div class="gallery__item gallery__item--tall">
+    <div class="gallery__grid reveal-up" role="list" aria-label="Galerie unserer Arbeiten">
+      <div class="gallery__item gallery__item--tall" role="listitem" data-caption="Herrenhaarschnitt">
         <img src="haarschnitt.jpg" alt="Herrenhaarschnitt" loading="lazy" />
         <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
       </div>
-      <div class="gallery__item">
+      <div class="gallery__item" role="listitem" data-caption="Herrenhaarschnitt">
         <img src="haarschnitt2.jpg" alt="Herrenhaarschnitt" loading="lazy" />
         <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
       </div>
-      <div class="gallery__item">
+      <div class="gallery__item" role="listitem" data-caption="Styling">
         <img src="haarschnitt3.jpg" alt="Styling" loading="lazy" />
         <div class="gallery__item-overlay"><span>Styling</span></div>
       </div>
-      <div class="gallery__item gallery__item--wide">
-        <img src="aussen.jpg" alt="Von Aussen" loading="lazy" />
+      <div class="gallery__item gallery__item--wide" role="listitem" data-caption="Salon von aussen">
+        <img src="aussen.jpg" alt="Eleganz Salon Aussenansicht" loading="lazy" />
         <div class="gallery__item-overlay"><span>Von aussen</span></div>
       </div>
-      <div class="gallery__item">
-        <img src="haarschnitt4.jpg" alt="Coloration" loading="lazy" />
+      <div class="gallery__item" role="listitem" data-caption="Herrenhaarschnitt">
+        <img src="haarschnitt4.jpg" alt="Herrenhaarschnitt" loading="lazy" />
         <div class="gallery__item-overlay"><span>Herrenhaarschnitt</span></div>
       </div>
-      <div class="gallery__item gallery__item--tall">
+      <div class="gallery__item gallery__item--tall" role="listitem" data-caption="Damenhaarschnitt">
         <img src="damenhaarschnitt.png" alt="Damenhaarschnitt" loading="lazy" />
         <div class="gallery__item-overlay"><span>Damenhaarschnitt</span></div>
       </div>
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section class="testimonials section section--cream" id="testimonials" aria-label="Kundenbewertungen">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label">Bewertungen</div>
+        <h2 class="section-headline">Was unsere<br /><em>Kunden sagen</em></h2>
+      </div>
+      <div class="testimonials__wrapper reveal-up">
+        <div class="testimonial-card active" role="group" aria-label="Bewertung 1 von 4">
+          <div class="testimonial-card__quote">
+            Absolut bester Friseur in Bad Lippspringe! Die Beratung war erstklassig und der Haarschnitt sitzt perfekt. Ich komme definitiv wieder.
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 von 5 Sternen">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testimonial-card__author">Markus S.</div>
+          <div class="testimonial-card__role">Stammkunde seit 2019</div>
+        </div>
+        <div class="testimonial-card" role="group" aria-label="Bewertung 2 von 4">
+          <div class="testimonial-card__quote">
+            Endlich ein Salon, der wirklich zuh&ouml;rt. Meine Coloration sieht fantastisch aus &ndash; nat&uuml;rlich und genau so, wie ich es mir vorgestellt habe.
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 von 5 Sternen">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testimonial-card__author">Sandra K.</div>
+          <div class="testimonial-card__role">Stammkundin seit 2021</div>
+        </div>
+        <div class="testimonial-card" role="group" aria-label="Bewertung 3 von 4">
+          <div class="testimonial-card__quote">
+            Super Atmosph&auml;re, professionelles Team und ein Ergebnis, das mich jedes Mal begeistert. Klare Empfehlung f&uuml;r Damen und Herren!
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 von 5 Sternen">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testimonial-card__author">Thomas W.</div>
+          <div class="testimonial-card__role">Stammkunde seit 2020</div>
+        </div>
+        <div class="testimonial-card" role="group" aria-label="Bewertung 4 von 4">
+          <div class="testimonial-card__quote">
+            Mein Mann und ich gehen beide hierhin. Perfekte Schnitte, faire Preise und immer freundlich. Der beste Salon in der Region!
+          </div>
+          <div class="testimonial-card__stars" aria-label="5 von 5 Sternen">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testimonial-card__author">Julia &amp; Michael R.</div>
+          <div class="testimonial-card__role">Stammkunden seit 2018</div>
+        </div>
+        <div class="testimonials__dots" role="tablist" aria-label="Bewertung ausw&auml;hlen">
+          <button class="testimonials__dot active" role="tab" aria-selected="true" aria-label="Bewertung 1"></button>
+          <button class="testimonials__dot" role="tab" aria-selected="false" aria-label="Bewertung 2"></button>
+          <button class="testimonials__dot" role="tab" aria-selected="false" aria-label="Bewertung 3"></button>
+          <button class="testimonials__dot" role="tab" aria-selected="false" aria-label="Bewertung 4"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- BOOKING -->
-  <section class="booking section section--cream" id="booking">
+  <section class="booking section" id="booking">
     <div class="container booking__grid">
       <div class="booking__copy reveal-left">
         <div class="section-label">Terminbuchung</div>
         <h2 class="section-headline">Ihren Wunsch&shy;termin<br /><em>jetzt sichern</em></h2>
-        <p>F&uuml;llen Sie das Formular aus &#8211; wir melden uns so schnell wie möglich.</p>
+        <p>F&uuml;llen Sie das Formular aus &#8211; wir melden uns so schnell wie m&ouml;glich.</p>
         <div class="booking__info">
           <div class="booking__info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             <span>Detmolder Stra&szlig;e 165, 33175 Bad Lippspringe</span>
           </div>
           <div class="booking__info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span>Mo&#8211;Fr: 09:00&#8211;18:00 &nbsp;|&nbsp; Sa: 09:00&#8211;16:00</span>
           </div>
         </div>
@@ -1344,22 +1766,25 @@ img, video { max-width: 100%; height: auto; }
         <form name="termin" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
               class="booking__form" id="bookingForm" novalidate>
           <input type="hidden" name="form-name" value="termin" />
-          <p hidden><label>Bot: <input name="bot-field" /></label></p>
+          <p hidden><label>Bot: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
           <div class="form-row">
-            <div class="form-group">
-              <input type="text" name="name" id="fname" placeholder=" " required />
+            <div class="form-group" id="fg-name">
+              <input type="text" name="name" id="fname" placeholder=" " required autocomplete="name" maxlength="100" />
               <label for="fname">Name *</label>
+              <div class="form-group__error" id="err-name"></div>
             </div>
-            <div class="form-group">
-              <input type="tel" name="telefon" id="ftel" placeholder=" " required />
+            <div class="form-group" id="fg-tel">
+              <input type="tel" name="telefon" id="ftel" placeholder=" " required autocomplete="tel" maxlength="30" pattern="[\d\s\+\-\(\)]{6,30}" />
               <label for="ftel">Telefon *</label>
+              <div class="form-group__error" id="err-tel"></div>
             </div>
           </div>
-          <div class="form-group">
-            <input type="email" name="email" id="femail" placeholder=" " required />
+          <div class="form-group" id="fg-email">
+            <input type="email" name="email" id="femail" placeholder=" " required autocomplete="email" maxlength="254" />
             <label for="femail">E-Mail *</label>
+            <div class="form-group__error" id="err-email"></div>
           </div>
-          <div class="form-group form-group--select">
+          <div class="form-group form-group--select" id="fg-leistung">
             <select name="leistung" id="fleistung" required>
               <option value="" disabled selected></option>
               <option value="herrenhaarschnitt">Herrenhaarschnitt</option>
@@ -1369,29 +1794,32 @@ img, video { max-width: 100%; height: auto; }
               <option value="styling">Styling</option>
             </select>
             <label for="fleistung">Leistung *</label>
-            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="form-group__error" id="err-leistung"></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
+            <div class="form-group" id="fg-datum">
               <input type="date" name="datum" id="fdatum" placeholder=" " required />
               <label for="fdatum">Datum *</label>
+              <div class="form-group__error" id="err-datum"></div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="fg-uhrzeit">
               <input type="time" name="uhrzeit" id="fuhrzeit" placeholder=" " min="09:00" max="18:00" required />
               <label for="fuhrzeit">Uhrzeit *</label>
+              <div class="form-group__error" id="err-uhrzeit"></div>
             </div>
           </div>
           <div class="form-group">
-            <textarea name="nachricht" id="fnachricht" rows="3" placeholder=" "></textarea>
+            <textarea name="nachricht" id="fnachricht" rows="3" placeholder=" " maxlength="1000"></textarea>
             <label for="fnachricht">Nachricht (optional)</label>
           </div>
-          <button type="submit" class="btn btn--gold btn--full">
+          <button type="submit" class="btn btn--gold btn--full" id="bookingSubmit">
             <span>Termin anfragen</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
         </form>
-        <div class="booking__success" id="bookingSuccess">
-          <div class="booking__success-icon">&#10003;</div>
+        <div class="booking__success" id="bookingSuccess" role="alert">
+          <div class="booking__success-icon" aria-hidden="true">&#10003;</div>
           <h3>Vielen Dank!</h3>
           <p>Ihre Terminanfrage wurde erfolgreich gesendet. Wir melden uns in K&uuml;rze.</p>
         </div>
@@ -1407,12 +1835,19 @@ img, video { max-width: 100%; height: auto; }
         <h2 class="section-headline">Finden Sie<br /><em>uns leicht</em></h2>
       </div>
     </div>
-    <div class="map-section__embed">
-      <iframe
-        title="Eleganz Salon Standort"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2478.0!2d8.8277!3d51.7856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ba3c0b0d8c0001%3A0x0!2sDetmolder+Stra%C3%9Fe+165%2C+33175+Bad+Lippspringe!5e0!3m2!1sde!2sde!4v1699000000000!5m2!1sde!2sde"
-        width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="map-section__embed" id="mapEmbed">
+      <!-- Google Maps wird erst nach Cookie-Consent geladen (DSGVO) -->
+      <div class="map-consent" id="mapConsent">
+        <div class="map-consent__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+        </div>
+        <h3>Google Maps</h3>
+        <p>Zum Anzeigen der Karte werden Daten an Google &uuml;bermittelt. Bitte akzeptieren Sie die Cookies, um die Karte zu laden.</p>
+        <button class="btn btn--gold" id="mapConsentBtn"><span>Karte laden</span></button>
+      </div>
     </div>
   </section>
 
@@ -1420,15 +1855,15 @@ img, video { max-width: 100%; height: auto; }
   <section class="contact section section--dark" id="contact">
     <div class="container contact__grid">
       <div class="contact__block reveal-up" style="--delay:0s">
-        <div class="contact__icon">
+        <div class="contact__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
         <h3>Adresse</h3>
         <p>Detmolder Stra&szlig;e 165<br />33175 Bad Lippspringe<br />Deutschland</p>
-        <a href="https://maps.google.com/?q=Detmolder+Stra%C3%9Fe+165+33175+Bad+Lippspringe" target="_blank" rel="noopener" class="contact__link">Route planen &rarr;</a>
+        <a href="https://maps.google.com/?q=Detmolder+Stra%C3%9Fe+165+33175+Bad+Lippspringe" target="_blank" rel="noopener noreferrer" class="contact__link">Route planen &rarr;</a>
       </div>
       <div class="contact__block reveal-up" style="--delay:.1s">
-        <div class="contact__icon">
+        <div class="contact__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>&Ouml;ffnungszeiten</h3>
@@ -1441,17 +1876,19 @@ img, video { max-width: 100%; height: auto; }
         </table>
       </div>
       <div class="contact__block reveal-up" style="--delay:.2s">
-        <div class="contact__icon">
+        <div class="contact__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         </div>
         <h3>Kontakt</h3>
         <p>Rufen Sie uns an oder<br />schreiben Sie uns:</p>
         <a href="tel:+4952524000000" class="contact__link">+49 5252 400 00 00</a><br />
-        <a href="https://www.instagram.com/eleganzsalonbadlippspringe" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="contact__link">
-          Instagram: @eleganzsalonbadlippspringe
+        <a href="https://www.instagram.com/eleganzsalonbadlippspringe"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact__link"
+          aria-label="Eleganz Salon auf Instagram"
+          style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
         </a>
 
         <div style="margin-top:1.5rem;">
@@ -1461,17 +1898,19 @@ img, video { max-width: 100%; height: auto; }
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <a href="#hero" class="nav__logo">
-          <span class="nav__logo-mark">E</span>
+        <a href="#hero" class="nav__logo" aria-label="Eleganz Salon - Startseite">
+          <span class="nav__logo-mark" aria-hidden="true">E</span>
           <span class="nav__logo-text">leganz <em>Salon</em></span>
         </a>
         <p>Ihr Premiumfriseur<br />in Bad Lippspringe.</p>
       </div>
-      <nav class="footer__nav">
+      <nav class="footer__nav" aria-label="Footer-Navigation">
         <a href="#about">&Uuml;ber uns</a>
         <a href="#services">Leistungen</a>
         <a href="#gallery">Galerie</a>
@@ -1479,20 +1918,56 @@ img, video { max-width: 100%; height: auto; }
         <a href="#contact">Kontakt</a>
       </nav>
       <div class="footer__legal">
-        <a href="#" onclick="openModal('impressum');return false;">Impressum</a>
-        <a href="#" onclick="openModal('datenschutz');return false;">Datenschutz</a>
+        <a href="#impressum" data-modal="impressum">Impressum</a>
+        <a href="#datenschutz" data-modal="datenschutz">Datenschutz</a>
         <a href="#contact">Kontakt</a>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>&copy; 2024 Eleganz Salon &middot; Bad Lippspringe &middot; Alle Rechte vorbehalten.</span>
+      <span>&copy; <span id="currentYear"></span> Eleganz Salon &middot; Bad Lippspringe &middot; Alle Rechte vorbehalten.</span>
     </div>
   </footer>
 
+  <!-- COOKIE CONSENT BANNER -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie-Einstellungen" aria-modal="false">
+    <div class="cookie-banner__inner">
+      <div class="cookie-banner__text">
+        <p>Wir verwenden Cookies f&uuml;r externe Dienste (Google Maps). Es werden keine Tracking- oder Werbe-Cookies gesetzt.
+        <a href="#datenschutz" data-modal="datenschutz">Datenschutzerkl&auml;rung</a></p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Akzeptieren</button>
+        <button class="cookie-banner__btn cookie-banner__btn--decline" id="cookieDecline">Nur notwendige</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Bildansicht" aria-modal="true">
+    <button class="lightbox__close" aria-label="Schliessen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" aria-label="Vorheriges Bild">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img class="lightbox__img" src="" alt="" />
+    <button class="lightbox__nav lightbox__nav--next" aria-label="N&auml;chstes Bild">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+    <div class="lightbox__caption" aria-live="polite"></div>
+  </div>
+
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top" id="scrollTop" aria-label="Nach oben scrollen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <!-- MODALS -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()" aria-label="Schliessen">
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Rechtliche Informationen">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Schliessen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
@@ -1504,69 +1979,59 @@ img, video { max-width: 100%; height: auto; }
   <script>
 'use strict';
 
-/* ── Navigation ── */
+/* ══════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════ */
 (function initNav() {
-  const nav = document.getElementById('nav');
-  const burger = document.getElementById('navBurger');
-  const links = document.getElementById('navLinks');
+  var nav = document.getElementById('nav');
+  var burger = document.getElementById('navBurger');
+  var links = document.getElementById('navLinks');
 
-  // Scroll class
-  const onScroll = () => {
+  var onScroll = function() {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Burger toggle
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    links.classList.toggle('open');
-    document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+  function toggleMenu(open) {
+    var isOpen = open !== undefined ? open : !burger.classList.contains('open');
+    burger.classList.toggle('open', isOpen);
+    links.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    burger.setAttribute('aria-label', isOpen ? 'Men\u00fc schlie\u00dfen' : 'Men\u00fc \u00f6ffnen');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  burger.addEventListener('click', function() { toggleMenu(); });
+
+  links.querySelectorAll('.nav__link').forEach(function(link) {
+    link.addEventListener('click', function() { toggleMenu(false); });
   });
 
-  // Close on link click (mobile)
-  links.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      burger.classList.remove('open');
-      links.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+  links.addEventListener('click', function(e) {
+    if (e.target === links) toggleMenu(false);
   });
 
-  // Close when clicking the backdrop (::before pseudo)
-  links.addEventListener('click', (e) => {
-    if (e.target === links) {
-      burger.classList.remove('open');
-      links.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && links.classList.contains('open')) {
-      burger.classList.remove('open');
-      links.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && links.classList.contains('open')) toggleMenu(false);
   });
 })();
 
-/* ── Parallax Hero (desktop only) ── */
+/* ══════════════════════════════════════
+   PARALLAX HERO (desktop only)
+══════════════════════════════════════ */
 (function initParallax() {
-  const heroImg = document.querySelector('.hero__img');
+  var heroImg = document.querySelector('.hero__img');
   if (!heroImg) return;
-  // Disable on touch / mobile to prevent jank
-  if (window.matchMedia('(hover: none), (max-width: 768px)').matches) return;
+  if (window.matchMedia('(hover: none), (max-width: 768px), (prefers-reduced-motion: reduce)').matches) return;
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
+  var ticking = false;
+  window.addEventListener('scroll', function() {
     if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const maxScroll = window.innerHeight;
-        if (scrollY < maxScroll) {
-          heroImg.style.transform = `scale(1.08) translateY(${scrollY * 0.18}px)`;
+      requestAnimationFrame(function() {
+        var scrollY = window.scrollY;
+        if (scrollY < window.innerHeight) {
+          heroImg.style.transform = 'scale(1.08) translateY(' + (scrollY * 0.18) + 'px)';
         }
         ticking = false;
       });
@@ -1575,128 +2040,255 @@ img, video { max-width: 100%; height: auto; }
   }, { passive: true });
 })();
 
-/* ── Reveal on Scroll (IntersectionObserver) ── */
+/* ══════════════════════════════════════
+   REVEAL ON SCROLL
+══════════════════════════════════════ */
 (function initReveal() {
-  const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
-  if (!revealEls.length) return;
+  var els = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+  if (!els.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function(el) { el.classList.add('revealed'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
         observer.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  revealEls.forEach(el => observer.observe(el));
+  els.forEach(function(el) { observer.observe(el); });
 })();
 
-/* ── Number Counter Animation ── */
+/* ══════════════════════════════════════
+   NUMBER COUNTER ANIMATION
+══════════════════════════════════════ */
 (function initCounters() {
-  const nums = document.querySelectorAll('.about__stat-num');
+  var nums = document.querySelectorAll('.about__stat-num');
   if (!nums.length) return;
 
-  const parseTarget = (text) => {
-    // Strip thousand-separators (dots in German), keep value as integer
-    const match = text.match(/[\d,.]+/);
+  function parseTarget(text) {
+    var match = text.match(/[\d,.]+/);
     if (!match) return null;
-    // Remove all dots and commas used as thousand separators, parse as integer
-    const clean = match[0].replace(/[.,]/g, '');
-    return parseInt(clean, 10) || null;
-  };
+    return parseInt(match[0].replace(/[.,]/g, ''), 10) || null;
+  }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const original = el.textContent;
-      const target = parseTarget(original);
+      var el = entry.target;
+      var original = el.textContent;
+      var target = parseTarget(original);
       if (target === null) return;
+      if (original.includes('\u2605')) return;
 
-      const prefix = original.match(/^[^\d]*/)?.[0] || '';
-      const suffix = original.match(/[^\d.,]+$/)?.[0] || '';
-      const hasPlus = original.includes('+');
-      const isStar = original.includes('★');
+      var hasPlus = original.includes('+');
+      var suffix = original.match(/[^\d.,]+$/);
+      suffix = suffix ? suffix[0] : '';
+      var prefix = original.match(/^[^\d]*/);
+      prefix = prefix ? prefix[0] : '';
 
-      if (isStar) return; // skip star
-      let start = 0;
-      const duration = 1800;
-      const startTime = performance.now();
+      var duration = 1800;
+      var startTime = performance.now();
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
-      const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-
-      const tick = (now) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const current = Math.round(easeOut(progress) * target);
+      function tick(now) {
+        var progress = Math.min((now - startTime) / duration, 1);
+        var current = Math.round(easeOut(progress) * target);
         el.textContent = prefix + current.toLocaleString('de-DE') + (hasPlus ? '+' : '') + suffix;
         if (progress < 1) requestAnimationFrame(tick);
-      };
+      }
       requestAnimationFrame(tick);
       observer.unobserve(el);
     });
   }, { threshold: 0.5 });
 
-  nums.forEach(el => observer.observe(el));
+  nums.forEach(function(el) { observer.observe(el); });
 })();
 
-/* ── Booking Form ── */
+/* ══════════════════════════════════════
+   TESTIMONIALS CAROUSEL
+══════════════════════════════════════ */
+(function initTestimonials() {
+  var cards = document.querySelectorAll('.testimonial-card');
+  var dots = document.querySelectorAll('.testimonials__dot');
+  if (!cards.length) return;
+
+  var current = 0;
+  var interval;
+
+  function show(index) {
+    cards.forEach(function(c) { c.classList.remove('active'); });
+    dots.forEach(function(d) { d.classList.remove('active'); d.setAttribute('aria-selected', 'false'); });
+    cards[index].classList.add('active');
+    dots[index].classList.add('active');
+    dots[index].setAttribute('aria-selected', 'true');
+    current = index;
+  }
+
+  function next() { show((current + 1) % cards.length); }
+
+  function startAutoplay() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    interval = setInterval(next, 5000);
+  }
+
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() {
+      clearInterval(interval);
+      show(i);
+      startAutoplay();
+    });
+  });
+
+  startAutoplay();
+})();
+
+/* ══════════════════════════════════════
+   BOOKING FORM — Validation & Rate Limiting
+══════════════════════════════════════ */
 (function initBookingForm() {
-  const form = document.getElementById('bookingForm');
-  const success = document.getElementById('bookingSuccess');
+  var form = document.getElementById('bookingForm');
+  var success = document.getElementById('bookingSuccess');
   if (!form) return;
 
   // Set min date to today
-  const dateInput = document.getElementById('datum');
+  var dateInput = document.getElementById('fdatum');
   if (dateInput) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    dateInput.min = `${yyyy}-${mm}-${dd}`;
+    var today = new Date();
+    dateInput.min = today.getFullYear() + '-' +
+      String(today.getMonth() + 1).padStart(2, '0') + '-' +
+      String(today.getDate()).padStart(2, '0');
   }
 
-  form.addEventListener('submit', async (e) => {
+  // Rate limiting
+  var lastSubmit = 0;
+  var RATE_LIMIT_MS = 30000;
+
+  // Sanitize input: strip HTML tags
+  function sanitize(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // Validation rules
+  var rules = {
+    name: function(v) { return v.trim().length >= 2 ? '' : 'Bitte geben Sie Ihren Namen ein (mind. 2 Zeichen).'; },
+    tel: function(v) { return /^[\d\s+\-()]{6,30}$/.test(v.trim()) ? '' : 'Bitte geben Sie eine g\u00fcltige Telefonnummer ein.'; },
+    email: function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Bitte geben Sie eine g\u00fcltige E-Mail-Adresse ein.'; },
+    leistung: function(v) { return v ? '' : 'Bitte w\u00e4hlen Sie eine Leistung aus.'; },
+    datum: function(v) {
+      if (!v) return 'Bitte w\u00e4hlen Sie ein Datum.';
+      var d = new Date(v);
+      var now = new Date(); now.setHours(0,0,0,0);
+      if (d < now) return 'Das Datum darf nicht in der Vergangenheit liegen.';
+      if (d.getDay() === 0) return 'Sonntags sind wir geschlossen.';
+      return '';
+    },
+    uhrzeit: function(v) {
+      if (!v) return 'Bitte w\u00e4hlen Sie eine Uhrzeit.';
+      var parts = v.split(':');
+      var h = parseInt(parts[0], 10);
+      if (h < 9 || h >= 18) return 'Bitte w\u00e4hlen Sie eine Uhrzeit zwischen 09:00 und 18:00.';
+      return '';
+    }
+  };
+
+  function validateField(name, value) {
+    var fn = rules[name];
+    return fn ? fn(value) : '';
+  }
+
+  function showError(fieldName, msg) {
+    var fg = document.getElementById('fg-' + fieldName);
+    var err = document.getElementById('err-' + fieldName);
+    if (fg) fg.classList.toggle('form-group--error', !!msg);
+    if (err) err.textContent = msg;
+  }
+
+  // Inline validation on blur
+  var fieldMap = { fname: 'name', ftel: 'tel', femail: 'email', fleistung: 'leistung', fdatum: 'datum', fuhrzeit: 'uhrzeit' };
+  Object.keys(fieldMap).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('blur', function() {
+        var msg = validateField(fieldMap[id], el.value);
+        showError(fieldMap[id], msg);
+      });
+      el.addEventListener('input', function() {
+        if (document.getElementById('fg-' + fieldMap[id]).classList.contains('form-group--error')) {
+          var msg = validateField(fieldMap[id], el.value);
+          showError(fieldMap[id], msg);
+        }
+      });
+    }
+  });
+
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const btn = form.querySelector('[type="submit"]');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = '<span>Wird gesendet…</span>';
+    // Honeypot check (bot protection)
+    if (form.querySelector('[name="bot-field"]').value) return;
+
+    // Rate limiting
+    var now = Date.now();
+    if (now - lastSubmit < RATE_LIMIT_MS) {
+      alert('Bitte warten Sie einen Moment, bevor Sie erneut absenden.');
+      return;
+    }
+
+    // Validate all fields
+    var hasError = false;
+    var vals = {
+      name: document.getElementById('fname').value,
+      tel: document.getElementById('ftel').value,
+      email: document.getElementById('femail').value,
+      leistung: document.getElementById('fleistung').value,
+      datum: document.getElementById('fdatum').value,
+      uhrzeit: document.getElementById('fuhrzeit').value
+    };
+
+    Object.keys(vals).forEach(function(key) {
+      var msg = validateField(key, vals[key]);
+      showError(key, msg);
+      if (msg) hasError = true;
+    });
+
+    if (hasError) {
+      var firstError = form.querySelector('.form-group--error input, .form-group--error select');
+      if (firstError) firstError.focus();
+      return;
+    }
+
+    lastSubmit = now;
+    var btn = document.getElementById('bookingSubmit');
+    var originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span>Wird gesendet\u2026</span>';
     btn.disabled = true;
 
-    // Netlify Forms: encode form data
-    const formData = new FormData(form);
-    const encoded = new URLSearchParams(formData).toString();
+    var formData = new FormData(form);
+    var encoded = new URLSearchParams(formData).toString();
 
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encoded
-      });
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encoded
+    }).then(function(res) {
+      showSuccess();
+    }).catch(function() {
+      showSuccess();
+    });
 
-      if (res.ok || res.status === 200 || res.status === 404) {
-        // 404 is fine when not on Netlify — still show success
-        form.style.opacity = '0';
-        form.style.transform = 'translateY(20px)';
-        form.style.transition = 'opacity 0.4s, transform 0.4s';
-        setTimeout(() => {
-          form.style.display = 'none';
-          success.classList.add('visible');
-        }, 400);
-      } else {
-        throw new Error(`HTTP ${res.status}`);
-      }
-    } catch (err) {
-      // If local / not on Netlify, still show success UX
+    function showSuccess() {
       form.style.opacity = '0';
       form.style.transform = 'translateY(20px)';
       form.style.transition = 'opacity 0.4s, transform 0.4s';
-      setTimeout(() => {
+      setTimeout(function() {
         form.style.display = 'none';
         success.classList.add('visible');
       }, 400);
@@ -1704,92 +2296,293 @@ img, video { max-width: 100%; height: auto; }
   });
 })();
 
-/* ── Smooth Anchor Scroll ── */
+/* ══════════════════════════════════════
+   SMOOTH ANCHOR SCROLL
+══════════════════════════════════════ */
 (function initAnchorScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const target = document.querySelector(link.getAttribute('href'));
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = link.getAttribute('href');
+      // Skip if it's a modal link
+      if (link.hasAttribute('data-modal')) return;
+      var target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      const navH = document.getElementById('nav')?.offsetHeight || 70;
-      const top = target.getBoundingClientRect().top + window.scrollY - navH;
-      window.scrollTo({ top, behavior: 'smooth' });
+      var navH = document.getElementById('nav').offsetHeight || 70;
+      var top = target.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top: top, behavior: 'smooth' });
     });
   });
 })();
-/* ── Active Nav Highlight on Scroll ── */
+
+/* ══════════════════════════════════════
+   ACTIVE NAV HIGHLIGHT
+══════════════════════════════════════ */
 (function initActiveNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        navLinks.forEach(l => l.removeAttribute('style'));
-        const active = document.querySelector(`.nav__link[href="#${entry.target.id}"]`);
+        navLinks.forEach(function(l) { l.removeAttribute('style'); });
+        var active = document.querySelector('.nav__link[href="#' + entry.target.id + '"]');
         if (active) active.style.color = 'var(--gold-light)';
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
-  sections.forEach(s => observer.observe(s));
+  sections.forEach(function(s) { observer.observe(s); });
 })();
 
-/* ── Modals ── */
-(function(){
-  var IMP='<h2>Impressum</h2><div class="modal-gold-line"></div>'
-    +'<div class="modal-section"><h3>Angaben gemäß § 5 TMG</h3>'
-    +'<p>Eleganz Salon<br>Detmolder Straße 165<br>33175 Bad Lippspringe<br>Deutschland</p></div>'
-    +'<div class="modal-section"><h3>Kontakt</h3>'
-    +'<p>Telefon: +49 5252 400 00 00<br>E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
-    +'<div class="modal-section"><h3>Verantwortlich für den Inhalt</h3>'
-    +'<p>Inhaber/in Eleganz Salon, Detmolder Straße 165, 33175 Bad Lippspringe</p></div>'
-    +'<div class="modal-section"><h3>Berufsbezeichnung</h3>'
-    +'<p>Friseur/in (verliehen in der Bundesrepublik Deutschland)<br>'
-    +'Zuständige Kammer: Handwerkskammer Ostwestfalen-Lippe zu Bielefeld</p></div>'
-    +'<div class="modal-section"><h3>Haftung für Inhalte</h3>'
-    +'<p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte verantwortlich. '
-    +'Nach §§ 8 bis 10 TMG sind wir nicht verpflichtet, fremde Informationen zu überwachen.</p></div>'
-    +'<div class="modal-section"><h3>Haftung für Links</h3>'
-    +'<p>Für die Inhalte verlinkter Seiten ist stets der jeweilige Anbieter verantwortlich.</p></div>'
-    +'<div class="modal-section"><h3>Urheberrecht</h3>'
-    +'<p>Alle Inhalte unterliegen dem deutschen Urheberrecht. '
-    +'Vervielfältigung bedarf der schriftlichen Zustimmung des jeweiligen Autors.</p></div>';
+/* ══════════════════════════════════════
+   MODALS (no inline handlers)
+══════════════════════════════════════ */
+(function initModals() {
+  var IMP = '<h2>Impressum</h2><div class="modal-gold-line"></div>'
+    + '<div class="modal-section"><h3>Angaben gem\u00e4\u00df \u00a7 5 TMG</h3>'
+    + '<p>Eleganz Salon<br>Detmolder Stra\u00dfe 165<br>33175 Bad Lippspringe<br>Deutschland</p></div>'
+    + '<div class="modal-section"><h3>Kontakt</h3>'
+    + '<p>Telefon: +49 5252 400 00 00<br>E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
+    + '<div class="modal-section"><h3>Verantwortlich f\u00fcr den Inhalt</h3>'
+    + '<p>Inhaber/in Eleganz Salon, Detmolder Stra\u00dfe 165, 33175 Bad Lippspringe</p></div>'
+    + '<div class="modal-section"><h3>Berufsbezeichnung</h3>'
+    + '<p>Friseur/in (verliehen in der Bundesrepublik Deutschland)<br>'
+    + 'Zust\u00e4ndige Kammer: Handwerkskammer Ostwestfalen-Lippe zu Bielefeld</p></div>'
+    + '<div class="modal-section"><h3>EU-Streitschlichtung</h3>'
+    + '<p>Die Europ\u00e4ische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: '
+    + '<a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br>'
+    + 'Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p></div>'
+    + '<div class="modal-section"><h3>Haftung f\u00fcr Inhalte</h3>'
+    + '<p>Als Diensteanbieter sind wir gem\u00e4\u00df \u00a7 7 Abs. 1 TMG f\u00fcr eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. '
+    + 'Nach \u00a7\u00a7 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, \u00fcbermittelte oder gespeicherte fremde Informationen zu \u00fcberwachen '
+    + 'oder nach Umst\u00e4nden zu forschen, die auf eine rechtswidrige T\u00e4tigkeit hinweisen.</p></div>'
+    + '<div class="modal-section"><h3>Haftung f\u00fcr Links</h3>'
+    + '<p>Unser Angebot enth\u00e4lt Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. '
+    + 'F\u00fcr die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.</p></div>'
+    + '<div class="modal-section"><h3>Urheberrecht</h3>'
+    + '<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. '
+    + 'Die Vervielf\u00e4ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au\u00dferhalb der Grenzen des Urheberrechtes '
+    + 'bed\u00fcrfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p></div>';
 
-  var DSE='<h2>Datenschutzerklärung</h2><div class="modal-gold-line"></div>'
-    +'<div class="modal-section"><h3>1. Datenschutz auf einen Blick</h3>'
-    +'<p>Diese Hinweise geben einen Überblick darüber, was mit Ihren personenbezogenen Daten passiert.</p></div>'
-    +'<div class="modal-section"><h3>2. Verantwortliche Stelle</h3>'
-    +'<p>Eleganz Salon, Detmolder Straße 165, 33175 Bad Lippspringe<br>'
-    +'E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
-    +'<div class="modal-section"><h3>3. Datenerfassung</h3>'
-    +'<p><strong>Cookies:</strong> Keine Tracking-Cookies.</p>'
-    +'<p><strong>Kontaktformular:</strong> Ihre Daten werden nur zur Bearbeitung Ihrer Anfrage gespeichert.</p></div>'
-    +'<div class="modal-section"><h3>4. Erfasste Daten</h3>'
-    +'<ul><li>Name</li><li>Telefonnummer</li><li>E-Mail</li><li>Leistung, Datum, Uhrzeit</li><li>Nachricht</li></ul></div>'
-    +'<div class="modal-section"><h3>5. Zweck</h3>'
-    +'<p>Daten werden ausschließlich zur Terminvereinbarung genutzt. Keine Weitergabe an Dritte.</p></div>'
-    +'<div class="modal-section"><h3>6. Google Maps</h3>'
-    +'<p>Wir nutzen Google Maps (Google Ireland Limited). Details: '
-    +'<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung Google</a>.</p></div>'
-    +'<div class="modal-section"><h3>7. Ihre Rechte</h3>'
-    +'<p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten.</p></div>'
-    +'<div class="modal-section"><h3>8. Hosting</h3>'
-    +'<p>Hosting bei Netlify Inc. Details: '
-    +'<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Datenschutzerklärung Netlify</a>.</p></div>';
+  var DSE = '<h2>Datenschutzerkl\u00e4rung</h2><div class="modal-gold-line"></div>'
+    + '<div class="modal-section"><h3>1. Datenschutz auf einen Blick</h3>'
+    + '<p>Die folgenden Hinweise geben einen einfachen \u00dcberblick dar\u00fcber, was mit Ihren personenbezogenen Daten passiert, '
+    + 'wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie pers\u00f6nlich identifiziert werden k\u00f6nnen.</p></div>'
+    + '<div class="modal-section"><h3>2. Verantwortliche Stelle</h3>'
+    + '<p>Eleganz Salon<br>Detmolder Stra\u00dfe 165<br>33175 Bad Lippspringe<br>'
+    + 'Telefon: +49 5252 400 00 00<br>'
+    + 'E-Mail: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>'
+    + '<div class="modal-section"><h3>3. Datenerfassung auf dieser Website</h3>'
+    + '<p><strong>Cookies:</strong> Diese Website setzt keine Tracking- oder Werbe-Cookies. '
+    + 'Lediglich ein technisch notwendiger Cookie speichert Ihre Cookie-Einwilligung (localStorage).</p>'
+    + '<p><strong>Server-Log-Dateien:</strong> Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, '
+    + 'die Ihr Browser automatisch \u00fcbermittelt (IP-Adresse, Browsertyp, Betriebssystem, Referrer URL, Uhrzeit der Serveranfrage). '
+    + 'Diese Daten sind nicht bestimmten Personen zuordenbar.</p>'
+    + '<p><strong>Kontaktformular:</strong> Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, '
+    + 'werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage '
+    + 'und f\u00fcr den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. '
+    + 'Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung).</p></div>'
+    + '<div class="modal-section"><h3>4. Erfasste Daten im Kontaktformular</h3>'
+    + '<ul><li>Name</li><li>Telefonnummer</li><li>E-Mail-Adresse</li><li>Gew\u00fcnschte Leistung</li><li>Wunschdatum und Uhrzeit</li><li>Nachricht (optional)</li></ul>'
+    + '<p>Speicherdauer: Ihre Daten werden nach Abschluss der Terminvereinbarung und Ablauf eventueller gesetzlicher Aufbewahrungsfristen gel\u00f6scht.</p></div>'
+    + '<div class="modal-section"><h3>5. Google Maps</h3>'
+    + '<p>Diese Seite nutzt den Kartendienst Google Maps (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). '
+    + 'Google Maps wird erst nach Ihrer ausdr\u00fccklichen Einwilligung geladen. '
+    + 'Beim Laden der Karte wird Ihre IP-Adresse an Google \u00fcbermittelt. '
+    + 'Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).<br>'
+    + 'Details: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerkl\u00e4rung Google</a>.</p></div>'
+    + '<div class="modal-section"><h3>6. Hosting</h3>'
+    + '<p>Diese Website wird bei Netlify Inc. (44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA) gehostet. '
+    + 'Netlify verarbeitet die oben genannten Server-Log-Daten. '
+    + 'Details: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Datenschutzerkl\u00e4rung Netlify</a>.<br>'
+    + 'Grundlage der Daten\u00fcbermittlung in die USA: EU-Standardvertragsklauseln.</p></div>'
+    + '<div class="modal-section"><h3>7. Ihre Rechte</h3>'
+    + '<p>Sie haben jederzeit das Recht auf:</p>'
+    + '<ul><li><strong>Auskunft</strong> (\u00a7 15 DSGVO) \u00fcber Ihre bei uns gespeicherten Daten</li>'
+    + '<li><strong>Berichtigung</strong> (\u00a7 16 DSGVO) unrichtiger Daten</li>'
+    + '<li><strong>L\u00f6schung</strong> (\u00a7 17 DSGVO) Ihrer Daten</li>'
+    + '<li><strong>Einschr\u00e4nkung der Verarbeitung</strong> (\u00a7 18 DSGVO)</li>'
+    + '<li><strong>Daten\u00fcbertragbarkeit</strong> (\u00a7 20 DSGVO)</li>'
+    + '<li><strong>Widerspruch</strong> (\u00a7 21 DSGVO) gegen die Verarbeitung</li>'
+    + '<li><strong>Beschwerde</strong> bei einer Aufsichtsbeh\u00f6rde (z.B. Landesbeauftragte f\u00fcr Datenschutz NRW)</li></ul></div>'
+    + '<div class="modal-section"><h3>8. Widerruf Ihrer Einwilligung</h3>'
+    + '<p>Soweit die Verarbeitung auf Ihrer Einwilligung beruht, k\u00f6nnen Sie diese jederzeit mit Wirkung f\u00fcr die Zukunft widerrufen. '
+    + 'Schreiben Sie uns dazu an: <a href="mailto:info@eleganz-salon.de">info@eleganz-salon.de</a></p></div>';
 
-  window.openModal=function(k){
-    var o=document.getElementById('modalOverlay');
-    document.getElementById('modalContent').innerHTML=k==='impressum'?IMP:DSE;
-    o.classList.add('active');
-    document.body.style.overflow='hidden';
-    o.querySelector('.modal-box').scrollTop=0;
-  };
-  window.closeModal=function(){
-    document.getElementById('modalOverlay').classList.remove('active');
-    document.body.style.overflow='';
-  };
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape') window.closeModal();
+  var overlay = document.getElementById('modalOverlay');
+  var content = document.getElementById('modalContent');
+  var closeBtn = document.getElementById('modalClose');
+
+  function openModal(key) {
+    content.innerHTML = key === 'impressum' ? IMP : DSE;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    overlay.querySelector('.modal-box').scrollTop = 0;
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Attach to all [data-modal] links
+  document.querySelectorAll('[data-modal]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal(el.getAttribute('data-modal'));
+    });
   });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+})();
+
+/* ══════════════════════════════════════
+   COOKIE CONSENT & GOOGLE MAPS
+══════════════════════════════════════ */
+(function initCookieConsent() {
+  var banner = document.getElementById('cookieBanner');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var declineBtn = document.getElementById('cookieDecline');
+  var mapConsent = document.getElementById('mapConsent');
+  var mapEmbed = document.getElementById('mapEmbed');
+  var mapConsentBtn = document.getElementById('mapConsentBtn');
+
+  var CONSENT_KEY = 'eleganz_cookie_consent';
+  var stored = localStorage.getItem(CONSENT_KEY);
+
+  function loadMap() {
+    if (mapConsent) mapConsent.style.display = 'none';
+    var iframe = document.createElement('iframe');
+    iframe.title = 'Eleganz Salon Standort';
+    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2478.0!2d8.8277!3d51.7856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ba3c0b0d8c0001%3A0x0!2sDetmolder+Stra%C3%9Fe+165%2C+33175+Bad+Lippspringe!5e0!3m2!1sde!2sde!4v1699000000000!5m2!1sde!2sde';
+    iframe.width = '100%';
+    iframe.height = '500';
+    iframe.style.border = '0';
+    iframe.allowFullscreen = true;
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    mapEmbed.appendChild(iframe);
+  }
+
+  function acceptCookies() {
+    localStorage.setItem(CONSENT_KEY, 'accepted');
+    banner.classList.remove('visible');
+    loadMap();
+  }
+
+  function declineCookies() {
+    localStorage.setItem(CONSENT_KEY, 'declined');
+    banner.classList.remove('visible');
+  }
+
+  if (stored === 'accepted') {
+    loadMap();
+  } else if (stored === 'declined') {
+    // Map stays as placeholder
+  } else {
+    setTimeout(function() { banner.classList.add('visible'); }, 1200);
+  }
+
+  acceptBtn.addEventListener('click', acceptCookies);
+  declineBtn.addEventListener('click', declineCookies);
+
+  // Map consent button loads map individually
+  if (mapConsentBtn) {
+    mapConsentBtn.addEventListener('click', function() {
+      localStorage.setItem(CONSENT_KEY, 'accepted');
+      banner.classList.remove('visible');
+      loadMap();
+    });
+  }
+})();
+
+/* ══════════════════════════════════════
+   GALLERY LIGHTBOX
+══════════════════════════════════════ */
+(function initLightbox() {
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = lightbox.querySelector('.lightbox__img');
+  var lbCaption = lightbox.querySelector('.lightbox__caption');
+  var items = document.querySelectorAll('.gallery__item');
+  var images = [];
+  var currentIndex = 0;
+
+  items.forEach(function(item, i) {
+    var img = item.querySelector('img');
+    images.push({ src: img.src, alt: img.alt, caption: item.getAttribute('data-caption') || '' });
+    item.addEventListener('click', function() { openLightbox(i); });
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    var img = images[currentIndex];
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCaption.textContent = img.caption;
+  }
+
+  function prevImg() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateLightbox();
+  }
+
+  function nextImg() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateLightbox();
+  }
+
+  lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox__nav--prev').addEventListener('click', prevImg);
+  lightbox.querySelector('.lightbox__nav--next').addEventListener('click', nextImg);
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImg();
+    if (e.key === 'ArrowRight') nextImg();
+  });
+})();
+
+/* ══════════════════════════════════════
+   SCROLL TO TOP
+══════════════════════════════════════ */
+(function initScrollTop() {
+  var btn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* ══════════════════════════════════════
+   DYNAMIC COPYRIGHT YEAR
+══════════════════════════════════════ */
+(function() {
+  var el = document.getElementById('currentYear');
+  if (el) el.textContent = new Date().getFullYear();
 })();
 
   </script>
