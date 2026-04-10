@@ -326,8 +326,11 @@ button { cursor: pointer; font-family: var(--ff-body); }
 
   .nav__links {
     position: fixed;
-    inset: 0;
-    width: 100%;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -337,8 +340,8 @@ button { cursor: pointer; font-family: var(--ff-body); }
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-left: none;
-    transform: translateY(-100%);
-    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.5s cubic-bezier(0.16,1,0.3,1);
     pointer-events: none;
     z-index: 1000;
     list-style: none;
@@ -347,7 +350,7 @@ button { cursor: pointer; font-family: var(--ff-body); }
   .nav__links li { width: auto; text-align: center; }
   .nav__links li + li { border-top: none; }
   .nav__links.open {
-    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
     pointer-events: all;
   }
   .nav__links::before { display: none; }
@@ -1584,7 +1587,7 @@ img, video { max-width: 100%; height: auto; }
           <div class="service-card__body">
             <h3>Herrenhaarschnitt</h3>
             <p>Klassisch oder modern &#8211; pr&auml;zise geschnitten und perfekt gestylt f&uuml;r jeden Anlass.</p>
-            <span class="service-card__price">ab 25 &euro;</span>
+            <span class="service-card__price">ab 19 &euro;</span>
           </div>
           <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
@@ -1618,7 +1621,7 @@ img, video { max-width: 100%; height: auto; }
           <div class="service-card__body">
             <h3>Bartpflege</h3>
             <p>Professionelle Rasur und Bartformung f&uuml;r den perfekten Auftritt.</p>
-            <span class="service-card__price">ab 18 &euro;</span>
+            <span class="service-card__price">ab 20 &euro;</span>
           </div>
           <div class="service-card__hover-line" aria-hidden="true"></div>
         </div>
